@@ -1,9 +1,17 @@
-import React from 'react';
+import { MouseEventHandler } from 'react';
 
-export const Button = ({ text, color }: { text: string; color: string }) => {
+interface ButtonProps {
+  action: MouseEventHandler<HTMLButtonElement>;
+  text: string;
+  color: string;
+}
+
+export const Button = ({ action, text, color }: ButtonProps) => {
   return (
     <div>
-      <button className={`btn ${color} rounded-2xl w-full`}>{text}</button>
+      <button type='submit' className={`btn ${color} rounded-2xl w-full`} onClick={action}>
+        {text}
+      </button>
     </div>
   );
 };

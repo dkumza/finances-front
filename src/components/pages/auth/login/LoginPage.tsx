@@ -1,8 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../inputs/Button';
 import { AuthHeader } from '../AuthHeader';
 import { LoginForm } from './LoginForm';
+import { useFormik } from 'formik';
+import { loginValSchema } from '../validationSchemas';
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleNavigateToSignUp = () => {
+    navigate('/signup');
+  };
+
   return (
     <div className='min-h-screen flex flex-col justify-center items-center md:w-96 w-80'>
       <div className='flex flex-col w-full px-4'>
@@ -11,7 +20,7 @@ export const LoginPage = () => {
         <div className='divider'>
           <p className='text-sm'>OR</p>
         </div>
-        <Button text='Sign Up' color='' />
+        <Button action={handleNavigateToSignUp} text='Sign Up' color='' />
       </div>
     </div>
   );

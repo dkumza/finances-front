@@ -3,6 +3,7 @@ import { FormikProps } from 'formik';
 interface FormValues {
   email: string;
   password: string;
+  repeatPassword?: string;
 }
 
 interface InputProps {
@@ -25,6 +26,9 @@ export const Input = ({ type, name, placeholder, formik }: InputProps) => {
         onBlur={handleBlur}
         value={values[name as keyof FormValues]}
       />
+      {formik.touched[name as keyof FormValues] && formik.errors[name as keyof FormValues] ? (
+        <p className='text-xs text-red-500'>{formik.errors[name as keyof FormValues]}</p>
+      ) : null}
     </div>
   );
 };

@@ -4,8 +4,8 @@ import { SignUpPage } from './components/pages/auth/signUp/SignUpPage';
 function App() {
   return (
     <div className='flex flex-col items-center align-middle'>
-      {/* <LoginPage /> */}
-      <SignUpPage />
+      <LoginPage />
+      {/* <SignUpPage /> */}
     </div>
   );
 }

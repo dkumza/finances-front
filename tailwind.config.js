@@ -2,7 +2,17 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      container: {
+        center: true,
+      },
+    },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: ['cupcake'],
+    base: true,
+    utils: true,
+    styled: true,
+  },
 };

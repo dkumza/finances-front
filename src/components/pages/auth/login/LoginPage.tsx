@@ -2,8 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../inputs/Button';
 import { AuthHeader } from '../AuthHeader';
 import { LoginForm } from './LoginForm';
-import { useFormik } from 'formik';
-import { loginValSchema } from '../validationSchemas';
 
 export const LoginPage = () => {
   const navigate = useNavigate();

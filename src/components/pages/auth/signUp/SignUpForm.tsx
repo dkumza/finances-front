@@ -8,7 +8,7 @@ export const SignUpForm = () => {
     initialValues: {
       email: '',
       password: '',
-      repeatPassword: '',
+      // repeatPassword: '',
     },
     validationSchema: signUpValSchema,
     onSubmit: (values) => {
@@ -20,15 +20,27 @@ export const SignUpForm = () => {
     <div className='container flex items-center justify-center flex-col'>
       <form className='w-full' onSubmit={formik.handleSubmit}>
         <div className='flex flex-col gap-4'>
-          <Input type='email' name='email' placeholder='Email' formik={formik} />
-          <Input type='password' name='password' placeholder='Password' formik={formik} />
           <Input
+            color='input-accent'
+            type='email'
+            name='email'
+            placeholder='Email'
+            formik={formik}
+          />
+          <Input
+            color='input-accent'
+            type='password'
+            name='password'
+            placeholder='Password'
+            formik={formik}
+          />
+          {/* <Input
             type='password'
             name='repeatPassword'
             placeholder='Repeat Password'
             formik={formik}
-          />
-          <Button action={() => {}} text='Sign Up' color='btn-primary' />
+          /> */}
+          <Button action={() => {}} text='Sign Up' color='btn-accent' />
         </div>
         <p className='text-xs text-right py-2'>* By registering, I confirm that I accept...</p>
       </form>

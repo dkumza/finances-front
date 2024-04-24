@@ -3,17 +3,18 @@ import { FormikProps } from 'formik';
 interface FormValues {
   email: string;
   password: string;
-  repeatPassword?: string;
+  // repeatPassword: undefined;
 }
 
 interface InputProps {
+  color: string;
   type: string;
   name: string;
   placeholder: string;
   formik: FormikProps<FormValues>;
 }
 
-export const Input = ({ type, name, placeholder, formik }: InputProps) => {
+export const Input = ({ color, type, name, placeholder, formik }: InputProps) => {
   const { handleChange, handleBlur, values } = formik;
   return (
     <div>
@@ -21,7 +22,7 @@ export const Input = ({ type, name, placeholder, formik }: InputProps) => {
         type={type}
         name={name}
         placeholder={placeholder}
-        className='input input-bordered rounded-xl input-primary w-full'
+        className={`${color} input input-bordered rounded-xl w-full`}
         onChange={handleChange}
         onBlur={handleBlur}
         value={values[name as keyof FormValues]}

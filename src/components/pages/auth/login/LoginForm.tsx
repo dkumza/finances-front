@@ -19,9 +19,21 @@ export const LoginForm = () => {
     <div className='container flex items-center justify-center flex-col'>
       <form className='w-full' onSubmit={formik.handleSubmit}>
         <div className='flex flex-col gap-4'>
-          <Input type='email' name='email' placeholder='Email' formik={formik} />
-          <Input type='password' name='password' placeholder='Password' formik={formik} />
-          <Button action={() => {}} text='Continue' color='btn-primary' />
+          <Input
+            color='input-primary'
+            type='email'
+            name='email'
+            placeholder='Email'
+            formik={formik}
+          />
+          <Input
+            color='input-primary'
+            type='password'
+            name='password'
+            placeholder='Password'
+            formik={formik}
+          />
+          <Button action={() => {}} text='Log in' color='btn-primary' />
         </div>
       </form>
     </div>

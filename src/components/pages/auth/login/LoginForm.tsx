@@ -2,16 +2,20 @@ import { useFormik } from 'formik';
 import { Button } from '../../../inputs/Button';
 import { Input } from '../../../inputs/Input';
 import { loginValSchema } from '../validationSchemas';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../../features/actions/login-actions';
 
 export const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'darius@email.com',
+      password: '123456',
     },
     validationSchema: loginValSchema,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(login(values));
     },
   });
 

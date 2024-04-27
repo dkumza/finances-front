@@ -5,14 +5,17 @@ import { login } from '../actions/login-actions';
 
 export interface LoginState {
   token: string;
+  email: string;
   loading: boolean;
   error: string | null;
 }
 
 const localStorageToken = localStorage.getItem('token');
+const localStorageEmail = localStorage.getItem('email');
 
 export const initialState: LoginState = {
   token: localStorageToken || '',
+  email: localStorageEmail || '',
   loading: false,
   error: null,
 };

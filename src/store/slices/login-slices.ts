@@ -1,6 +1,6 @@
 // login-slices.ts
 import { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '../../app/createSlice';
+import { createSlice } from './createSlice';
 import { login } from '../actions/login-actions';
 
 export interface LoginState {

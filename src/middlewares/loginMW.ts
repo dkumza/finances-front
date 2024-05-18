@@ -11,8 +11,8 @@ export const loginMW: Middleware<{}, RootState> = (storeApi) => (next) => (actio
   const result = next(action);
   // getting only the token from the store, and saving as JSON to local storage
   const tokenState = storeApi.getState().login.token;
-  const tokenJSON = JSON.stringify(tokenState);
-  localStorage.setItem('token', tokenJSON);
+  // const tokenJSON = JSON.stringify(tokenState);
+  localStorage.setItem('token', tokenState);
 
   //  decode the token and save needed data to local storage
   if (tokenState) {

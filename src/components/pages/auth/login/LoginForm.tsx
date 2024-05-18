@@ -38,6 +38,7 @@ export const LoginForm = () => {
         }
         if (result.type === 'login/loginUser/rejected') {
           console.log('login result error: ', result.payload.response?.data?.message);
+          toast.error(result.payload.response?.data?.message);
         }
       });
     },

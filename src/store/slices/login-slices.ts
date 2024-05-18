@@ -1,4 +1,3 @@
-// login-slices.ts
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from './createSlice';
 import { login, tokenStatus } from '../actions/login-actions';
@@ -42,6 +41,7 @@ export const loginSlice = createSlice({
       .addCase(login.rejected, (state) => {
         state.loading = false;
       })
+      // Token status
       .addCase(tokenStatus.fulfilled, (state, action: PayloadAction<string>) => {
         state.tokenStatus = action.payload;
         state.error = null;

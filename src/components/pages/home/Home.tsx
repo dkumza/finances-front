@@ -18,7 +18,7 @@ export const Home = () => {
         if (tokenStatus.rejected.match(result)) {
           navigate('/login');
           toast.error('Session expired');
-          console.log('error: ', result.error.message);
+          console.log('error: ', result.error);
         }
       });
     }

@@ -32,7 +32,6 @@ export const LoginForm = () => {
     onSubmit: (values) => {
       dispatch(login(values)).then((result: LoginResult) => {
         if (result.type === 'login/loginUser/fulfilled') {
-          console.log('login result: ', result);
           toast.success('Login successful');
           navigate('/');
         }

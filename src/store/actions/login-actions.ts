@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const AUTH_URL = 'http://127.0.0.1:3000/auth';
 
@@ -11,8 +11,12 @@ export const login = createAsyncThunk(
       const response = await axios.post(`${AUTH_URL}/login`, loginData);
       // console.log('response: ', response.data);
       return response.data.accessToken;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue({ message: error.message, status: error.response?.status });
+    } catch (error: unknown) {
+      const axiosError = error as AxiosError;
+      return thunkAPI.rejectWithValue({
+        message: axiosError.message,
+        status: axiosError.response?.status,
+      });
     }
   }
 );
@@ -21,15 +25,18 @@ export const tokenStatus = createAsyncThunk(
   'login/tokenStatus',
 
   async (token: string, thunkAPI) => {
-    console.log('token: ', token);
     try {
       const response = await axios.get(`${AUTH_URL}/status`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       return response.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response?.data.message);
+    } catch (error: unknown) {
+      const axiosError = error as AxiosError;
+      return thunkAPI.rejectWithValue({
+        message: axiosError.message,
+        status: axiosError.response?.status,
+      });
     }
   }
 );

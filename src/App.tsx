@@ -5,6 +5,7 @@ import { Home } from './components/pages/home/Home';
 import { useAppSelector } from './store/hooks';
 import { ToastThemed } from './components/UI/ToastThemed.tsx';
 import 'react-toastify/dist/ReactToastify.css';
+import { PageNotFound } from './components/pages/pageNotFound/PageNotFound.tsx';
 
 function App() {
   const token = useAppSelector((state) => state.login.token);
@@ -14,8 +15,10 @@ function App() {
       <ToastThemed />
       <Routes>
         <Route path='/' element={token ? <Home /> : <Navigate to='/login' />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/login' element={token ? <Navigate to='/' /> : <LoginPage />} />
+        <Route path='/signup' element={token ? <Navigate to='/' /> : <SignUpPage />} />
+        {/* 404 route */}
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </div>
   );

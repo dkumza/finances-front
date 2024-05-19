@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../../../store/actions/login-actions';
 import { AppDispatch } from '../../../../store/store';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../../../store/hooks';
 import { toast } from 'react-toastify';
 
 interface LoginResult {
@@ -21,7 +20,6 @@ interface LoginResult {
 }
 
 export const LoginForm = () => {
-  // const loading = useAppSelector((state) => state.login.loading);
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,12 +32,12 @@ export const LoginForm = () => {
     onSubmit: (values) => {
       dispatch(login(values)).then((result: LoginResult) => {
         if (result.type === 'login/loginUser/fulfilled') {
-          console.log('login result: ', result);
           toast.success('Login successful');
           navigate('/');
         }
         if (result.type === 'login/loginUser/rejected') {
           console.log('login result error: ', result.payload.response?.data?.message);
+          toast.error(result.payload.response?.data?.message);
         }
       });
     },

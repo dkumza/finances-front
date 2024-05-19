@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* .Toastify__progress-bar-theme--light {
+    background: #65c3c8;
+} */
+
+.Toastify__progress-bar--success {
+    background: #65c3c8;
+}

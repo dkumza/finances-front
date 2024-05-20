@@ -18,7 +18,7 @@ const handleAxiosError = (
 
 export const login = createAsyncThunk<
   string,
-  { email: string; password: string },
+  { email?: string; password?: string },
   { rejectValue: MyRejectValue }
 >('login/loginUser', async (loginData, thunkAPI) => {
   try {

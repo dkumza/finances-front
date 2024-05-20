@@ -19,11 +19,16 @@ interface LoginResult {
   };
 }
 
+interface FormValues {
+  email?: string;
+  password?: string;
+}
+
 export const LoginForm = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
-  const formik = useFormik({
+  const formik = useFormik<FormValues>({
     initialValues: {
       email: 'darius@email.com',
       password: '123456',

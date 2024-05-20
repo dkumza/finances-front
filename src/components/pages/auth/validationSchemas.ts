@@ -19,3 +19,9 @@ export const signUpValSchema = yup.object({
     .oneOf([yup.ref('password'), undefined], 'Passwords do not match')
     .required('Repeat password is required'),
 });
+
+export const expensesValSchema = yup.object({
+  title: yup.string().trim().required('Title is required'),
+  description: yup.string().trim().required('Description is required'),
+  amount: yup.number().required('Amount is required'),
+});

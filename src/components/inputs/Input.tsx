@@ -1,8 +1,11 @@
 import { FormikProps } from 'formik';
 
 interface FormValues {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
+  title?: string;
+  description?: string;
+  amount?: number;
   // repeatPassword: undefined;
 }
 

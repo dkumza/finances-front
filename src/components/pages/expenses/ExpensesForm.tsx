@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import { expensesValSchema } from '../auth/validationSchemas';
 import { Input } from '../../inputs/Input';
 import { Button } from '../../inputs/Button';
+import { Select } from '../../inputs/Select';
 
 interface FormValues {
   title?: string;
@@ -26,6 +27,7 @@ export const ExpensesForm = () => {
     <div className='container flex items-center justify-center flex-col'>
       <form className='w-full' onSubmit={formik.handleSubmit}>
         <div className='flex flex-col gap-4'>
+          <Select color='select-primary' />
           <Input
             color='input-primary'
             type='text'

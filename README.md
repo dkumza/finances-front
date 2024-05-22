@@ -1,4 +1,5 @@
 ## front for finances-api
+Still in progress...
 
 api can be found [here](https://github.com/dkumza/finances_api)
 

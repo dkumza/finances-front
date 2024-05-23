@@ -1,20 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
+import { MyRejectValue, handleAxiosError } from '../../helpers/handleAxiosError';
 
 const AUTH_URL = 'http://127.0.0.1:3000/auth';
-
-type MyRejectValue = { message: string; status: number | undefined };
-
-const handleAxiosError = (
-  error: unknown,
-  thunkAPI: { rejectWithValue: (value: MyRejectValue) => void }
-) => {
-  const axiosError = error as AxiosError;
-  return thunkAPI.rejectWithValue({
-    message: axiosError.message,
-    status: axiosError.response?.status,
-  });
-};
 
 export const login = createAsyncThunk<
   string,

@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from './createSlice';
-import { login, tokenStatus } from '../actions/login-actions';
+import { login, tokenStatus } from '../actions/loginActions';
 
 export interface LoginState {
   token: string;

@@ -24,11 +24,7 @@ export const initialState: LoginState = {
 export const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -52,7 +48,5 @@ export const loginSlice = createSlice({
       });
   },
 });
-
-export const { setLoading } = loginSlice.actions;
 
 export default loginSlice.reducer;

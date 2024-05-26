@@ -6,6 +6,19 @@ import { Select } from '../../inputs/Select';
 import { AppDispatch } from '../../../store/store';
 import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
+import { toast } from 'react-toastify';
+
+interface ExpenseResult {
+  type: 'expenses/createExpense/fulfilled' | 'expenses/createExpense/rejected';
+  payload: {
+    _id?: string;
+    response?: {
+      data?: {
+        message: string;
+      };
+    };
+  };
+}
 
 interface FormValues {
   category?: string;
@@ -27,7 +40,17 @@ export const ExpensesForm = () => {
     validationSchema: expensesValSchema,
     onSubmit: (values) => {
       console.log('values: ', values);
-      dispatch(createExpense(values));
+      dispatch(createExpense(values)).then((result: ExpenseResult) => {
+        if (result.type === 'expenses/createExpense/fulfilled') {
+          const { _id } = result.payload;
+          console.log('new created expense id: ', _id);
+          toast.success('Expense created');
+        }
+        if (result.type === 'expenses/createExpense/rejected') {
+          console.log('error creating expense', result.payload.response?.data?.message);
+          toast.error(result.payload.response?.data?.message);
+        }
+      });
     },
   });
 
@@ -50,6 +73,7 @@ export const ExpensesForm = () => {
             placeholder='Description'
             formik={formik}
           />
+
           <Input
             color='input-primary'
             type='number'

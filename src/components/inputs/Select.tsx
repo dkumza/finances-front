@@ -23,7 +23,6 @@ export const Select = ({ color, name, formik }: SelectProps) => {
         },
       })
       .then((response) => {
-        console.log('response: ', response.data);
         setCategories(Object.values(response.data));
       })
       .catch((error) => {

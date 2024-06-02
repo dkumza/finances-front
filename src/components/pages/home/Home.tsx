@@ -4,7 +4,7 @@ import { tokenStatus } from '../../../store/actions/authActions';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { LoginState } from '../../../store/slices/loginSlices';
+import { LoginState } from '../../../store/slices/authSlice';
 
 export const Home = () => {
   const navigate = useNavigate();

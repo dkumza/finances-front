@@ -7,7 +7,7 @@ export interface ExpenseState {
   error: string | null;
 }
 
-const initialState: ExpenseState = {
+export const initialState: ExpenseState = {
   expense: '',
   expensesStatus: false,
   error: null,

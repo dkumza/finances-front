@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from './createSlice';
 import { login, tokenStatus } from '../actions/authActions';
 
-export interface LoginState {
+export interface AuthState {
   token: string;
   tokenStatus: string;
   email: string;
@@ -13,7 +13,7 @@ export interface LoginState {
 const localStorageToken = localStorage.getItem('token');
 const localStorageEmail = localStorage.getItem('email');
 
-export const initialState: LoginState = {
+export const initialState: AuthState = {
   token: localStorageToken || '',
   tokenStatus: '',
   email: localStorageEmail || '',
@@ -21,8 +21,8 @@ export const initialState: LoginState = {
   error: null,
 };
 
-export const loginSlice = createSlice({
-  name: 'login',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -49,4 +49,4 @@ export const loginSlice = createSlice({
   },
 });
 
-export default loginSlice.reducer;
+export default authSlice.reducer;

@@ -23,7 +23,7 @@ export const login = createAsyncThunk<string, object, { rejectValue: MyRejectVal
   'login/loginUser',
   async (loginData, thunkAPI) => {
     try {
-      const response = await axios.post(`${AUTH_URL}/auth/login`, loginData);
+      const response = await axios.post(`${AUTH_URL}/auth/token`, loginData);
       // console.log('response: ', response.data);
       return response.data.accessToken;
     } catch (error) {

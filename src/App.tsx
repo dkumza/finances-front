@@ -7,6 +7,7 @@ import { ToastThemed } from './components/UI/ToastThemed.tsx';
 import 'react-toastify/dist/ReactToastify.css';
 import { PageNotFound } from './components/pages/pageNotFound/PageNotFound.tsx';
 import { ExpensesPage } from './components/pages/expenses/ExpensesPage.tsx';
+import { ExpensesAll } from './components/pages/expenses/ExpensesAll.tsx';
 
 function App() {
   const token = useAppSelector((state) => state.login.token);
@@ -19,6 +20,7 @@ function App() {
         <Route path='/login' element={token ? <Navigate to='/' /> : <LoginPage />} />
         <Route path='/signup' element={token ? <Navigate to='/' /> : <SignUpPage />} />
         <Route path='/expenses' element={<ExpensesPage />} />
+        <Route path='/expenses-all' element={<ExpensesAll />} />
         {/* 404 route */}
         <Route path='*' element={<PageNotFound />} />
       </Routes>

@@ -13,11 +13,11 @@ export const loginValSchema = yup.object({
 export const signUpValSchema = yup.object({
   email: yup.string().trim().email().required('Email is required'),
   password: yup.string().trim().required('Password is required'),
-  repeatPassword: yup
-    .string()
-    .trim()
-    .oneOf([yup.ref('password'), undefined], 'Passwords do not match')
-    .required('Repeat password is required'),
+  // repeatPassword: yup
+  //   .string()
+  //   .trim()
+  //   .oneOf([yup.ref('password'), undefined], 'Passwords do not match')
+  //   .required('Repeat password is required'),
 });
 
 export const expensesValSchema = yup.object({

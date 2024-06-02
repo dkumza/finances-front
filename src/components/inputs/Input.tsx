@@ -28,6 +28,8 @@ export const Input = ({ color, type, name, placeholder, formik }: InputProps) =>
         className={`${color} input input-bordered rounded-xl w-full`}
         onChange={handleChange}
         onBlur={handleBlur}
+        min={0}
+        prefix='$'
         value={values[name as keyof FormValues]}
       />
       {formik.touched[name as keyof FormValues] && formik.errors[name as keyof FormValues] ? (

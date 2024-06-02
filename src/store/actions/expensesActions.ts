@@ -21,3 +21,20 @@ export const createExpense = createAsyncThunk<string, object, { rejectValue: MyR
     }
   }
 );
+
+export const fetchExpenses = createAsyncThunk<string, void, { rejectValue: MyRejectValue }>(
+  'expenses/fetchExpenses',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get(EXP_URL, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const { data } = response;
+      console.log('data: ', data);
+      return data;
+    } catch (error) {
+      console.error('error: ', error);
+      return handleAxiosError(error, thunkAPI);
+    }
+  }
+);

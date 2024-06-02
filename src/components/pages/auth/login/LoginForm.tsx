@@ -3,7 +3,7 @@ import { Button } from '../../../inputs/Button';
 import { Input } from '../../../inputs/Input';
 import { loginValSchema } from '../validationSchemas';
 import { useDispatch } from 'react-redux';
-import { login } from '../../../../store/actions/loginActions';
+import { login } from '../../../../store/actions/authActions';
 import { AppDispatch } from '../../../../store/store';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';

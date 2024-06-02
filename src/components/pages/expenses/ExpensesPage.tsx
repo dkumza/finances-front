@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { AuthHeader } from '../auth/AuthHeader';
+import { AuthHeader } from '../../UI/Header';
 import { ExpensesForm } from './ExpensesForm';
 
 export const ExpensesPage = () => {

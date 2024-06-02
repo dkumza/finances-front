@@ -81,7 +81,7 @@ export const ExpensesForm = () => {
             placeholder='Amount'
             formik={formik}
           />
-          <Button action={() => {}} text='Submit' color='btn-primary' />
+          <Button action={() => { }} text='Submit' color='btn-primary' />
         </div>
       </form>
     </div>

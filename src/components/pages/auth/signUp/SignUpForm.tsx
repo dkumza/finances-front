@@ -1,10 +1,14 @@
-import { useFormik } from 'formik';
+import { FormikValues, useFormik } from 'formik';
 import { Button } from '../../../inputs/Button';
 import { Input } from '../../../inputs/Input';
 import { signUpValSchema } from '../validationSchemas';
+import { useAppDispatch } from '../../../../store/hooks';
+import { signUp } from '../../../../store/actions/authActions';
 
 export const SignUpForm = () => {
-  const formik = useFormik({
+  const dispatch = useAppDispatch();
+
+  const formik = useFormik<FormikValues>({
     initialValues: {
       email: '',
       password: '',
@@ -12,6 +16,7 @@ export const SignUpForm = () => {
     },
     validationSchema: signUpValSchema,
     onSubmit: (values) => {
+      dispatch(signUp(values));
       console.log(values);
     },
   });

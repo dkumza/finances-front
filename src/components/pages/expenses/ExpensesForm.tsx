@@ -1,18 +1,12 @@
 import { useFormik } from 'formik';
 import { expensesValSchema } from '../auth/validationSchemas';
-import { Input } from '../../inputs/Input';
+import { FormValues, Input } from '../../inputs/Input';
 import { Button } from '../../inputs/Button';
 import { Select } from '../../inputs/Select';
 import { AppDispatch } from '../../../store/store';
 import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
-
-interface FormValues {
-  category?: string;
-  description?: string;
-  amount?: number;
-}
 
 export const ExpensesForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -21,7 +15,7 @@ export const ExpensesForm = () => {
     initialValues: {
       category: '',
       description: '',
-      amount: 0,
+      amount: null,
     },
     validationSchema: expensesValSchema,
     onSubmit: (values) => {

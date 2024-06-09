@@ -5,7 +5,7 @@ import { MyRejectValue, handleAxiosError } from '../../helpers/handleAxiosError'
 const AUTH_URL = 'http://127.0.0.1:3000';
 
 export const tokenStatus = createAsyncThunk<string, string, { rejectValue: MyRejectValue }>(
-  'login/tokenStatus',
+  'auth/tokenStatus',
   async (token, thunkAPI) => {
     try {
       const response = await axios.get(`${AUTH_URL}/auth/status`, {
@@ -18,13 +18,11 @@ export const tokenStatus = createAsyncThunk<string, string, { rejectValue: MyRej
     }
   }
 );
-
 export const login = createAsyncThunk<string, object, { rejectValue: MyRejectValue }>(
-  'login/loginUser',
+  'auth/loginUser',
   async (loginData, thunkAPI) => {
     try {
       const response = await axios.post(`${AUTH_URL}/auth/token`, loginData);
-      // console.log('response: ', response.data);
       return response.data.accessToken;
     } catch (error) {
       return handleAxiosError(error, thunkAPI);
@@ -33,7 +31,7 @@ export const login = createAsyncThunk<string, object, { rejectValue: MyRejectVal
 );
 
 export const signUp = createAsyncThunk<string, object, { rejectValue: MyRejectValue }>(
-  'login/signUpUser',
+  'auth/signUpUser',
   async (signUpData, thunkAPI) => {
     try {
       const response = await axios.post(`${AUTH_URL}/users`, signUpData);

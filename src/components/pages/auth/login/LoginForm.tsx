@@ -1,17 +1,12 @@
 import { useFormik } from 'formik';
 import { Button } from '../../../inputs/Button';
-import { Input } from '../../../inputs/Input';
+import { FormValues, Input } from '../../../inputs/Input';
 import { loginValSchema } from '../validationSchemas';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../../store/actions/authActions';
 import { AppDispatch } from '../../../../store/store';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-interface FormValues {
-  email?: string;
-  password?: string;
-}
 
 export const LoginForm = () => {
   const dispatch: AppDispatch = useDispatch();

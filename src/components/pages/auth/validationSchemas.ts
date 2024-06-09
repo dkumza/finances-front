@@ -25,3 +25,7 @@ export const expensesValSchema = yup.object({
   description: yup.string().trim().required('Description is required'),
   amount: yup.number().required('Amount is required'),
 });
+
+export const searchValSchema = yup.object({
+  search: yup.string().trim().required('Search is required'),
+});

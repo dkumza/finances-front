@@ -20,14 +20,11 @@ export const LoginForm = () => {
     validationSchema: loginValSchema,
     onSubmit: (values) => {
       dispatch(login(values))
-        .then((unwrapResult) => {
-          // The login action has been fulfilled
-          console.log('Login success: ', unwrapResult.payload);
-          // toast.success('Login successful');
+        .then(() => {
           navigate('/');
+          toast.success('Login successful');
         })
         .catch((rejectedValueOrSerializedError) => {
-          // The login action has been rejected
           console.error('Error while logging in: ', rejectedValueOrSerializedError);
           toast.error('Error creating expense');
         });

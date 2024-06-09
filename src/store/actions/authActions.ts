@@ -36,7 +36,6 @@ export const signUp = createAsyncThunk<string, object, { rejectValue: MyRejectVa
     try {
       const response = await axios.post(`${AUTH_URL}/users`, signUpData);
       const { data } = response;
-      console.log('data: ', data);
       return data;
     } catch (error) {
       return handleAxiosError(error, thunkAPI);

@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from './createSlice';
-import { login, tokenStatus } from '../actions/authActions';
+import { login, signUp, tokenStatus } from '../actions/authActions';
 
 export interface AuthState {
   token: string;
@@ -24,9 +24,27 @@ export const initialState: AuthState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.token = '';
+      state.tokenStatus = '';
+      state.email = '';
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
+      // Sign up
+      .addCase(signUp.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(signUp.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(signUp.rejected, (state) => {
+        state.loading = false;
+      })
+      // Login
       .addCase(login.pending, (state) => {
         state.loading = true;
       })
@@ -48,5 +66,7 @@ export const authSlice = createSlice({
       });
   },
 });
+
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

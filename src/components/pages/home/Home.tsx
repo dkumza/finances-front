@@ -4,6 +4,7 @@ import { tokenStatus } from '../../../store/actions/authActions';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { logout } from '../../../store/slices/authSlice';
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -23,5 +24,22 @@ export const Home = () => {
     }
   }, [token, dispatch, navigate]);
 
-  return <div>Home</div>;
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem('token');
+    navigate('/login');
+    toast.success('Logged out');
+  };
+
+  return (
+    <div>
+      <div>Home</div>
+      <div className='cursor-pointer' onClick={handleLogout}>
+        Logout
+      </div>
+      <div className='cursor-pointer' onClick={() => navigate('/dash')}>
+        Dashboard
+      </div>
+    </div>
+  );
 };

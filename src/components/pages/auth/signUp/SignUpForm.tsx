@@ -4,9 +4,12 @@ import { Input } from '../../../inputs/Input';
 import { signUpValSchema } from '../validationSchemas';
 import { useAppDispatch } from '../../../../store/hooks';
 import { signUp } from '../../../../store/actions/authActions';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export const SignUpForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const formik = useFormik<FormikValues>({
     initialValues: {
@@ -16,8 +19,15 @@ export const SignUpForm = () => {
     },
     validationSchema: signUpValSchema,
     onSubmit: (values) => {
-      dispatch(signUp(values));
-      console.log(values);
+      dispatch(signUp(values))
+        .then(() => {
+          navigate('/login');
+          toast.success('Account created successfully');
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          console.error('Error while signing up: ', rejectedValueOrSerializedError);
+          toast.error('Error creating account');
+        });
     },
   });
 

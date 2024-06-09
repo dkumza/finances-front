@@ -21,9 +21,8 @@ export const ExpensesForm = () => {
     onSubmit: (values) => {
       console.log('values: ', values);
       dispatch(createExpense(values))
-        .then((unwrapResult) => {
+        .then(() => {
           // The createExpense action has been fulfilled
-          console.log('Expense created with id: ', unwrapResult.payload);
           toast.success('Expense created successfully');
         })
         .catch((rejectedValueOrSerializedError) => {

@@ -1,11 +1,13 @@
 import { FormikProps } from 'formik';
 
-interface FormValues {
+export interface FormValues {
   email?: string;
   password?: string;
+  category?: string;
   title?: string;
   description?: string;
-  amount?: number;
+  amount?: number | null;
+  search?: string;
   // repeatPassword: undefined;
 }
 
@@ -28,7 +30,9 @@ export const Input = ({ color, type, name, placeholder, formik }: InputProps) =>
         className={`${color} input input-bordered rounded-xl w-full`}
         onChange={handleChange}
         onBlur={handleBlur}
-        value={values[name as keyof FormValues]}
+        min={0}
+        // prefix='$'
+        value={values[name as keyof FormValues] || ''}
       />
       {formik.touched[name as keyof FormValues] && formik.errors[name as keyof FormValues] ? (
         <p className='text-xs text-red-500'>{formik.errors[name as keyof FormValues]}</p>

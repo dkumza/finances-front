@@ -1,8 +1,8 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from './createSlice';
-import { login, tokenStatus } from '../actions/loginActions';
+import { login, signUp, tokenStatus } from '../actions/authActions';
 
-export interface LoginState {
+export interface AuthState {
   token: string;
   tokenStatus: string;
   email: string;
@@ -13,7 +13,7 @@ export interface LoginState {
 const localStorageToken = localStorage.getItem('token');
 const localStorageEmail = localStorage.getItem('email');
 
-export const initialState: LoginState = {
+export const initialState: AuthState = {
   token: localStorageToken || '',
   tokenStatus: '',
   email: localStorageEmail || '',
@@ -21,16 +21,30 @@ export const initialState: LoginState = {
   error: null,
 };
 
-export const loginSlice = createSlice({
-  name: 'login',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
+    logout: (state) => {
+      state.token = '';
+      state.tokenStatus = '';
+      state.email = '';
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
     builder
+      // Sign up
+      .addCase(signUp.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(signUp.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(signUp.rejected, (state) => {
+        state.loading = false;
+      })
+      // Login
       .addCase(login.pending, (state) => {
         state.loading = true;
       })
@@ -53,6 +67,6 @@ export const loginSlice = createSlice({
   },
 });
 
-export const { setLoading } = loginSlice.actions;
+export const { logout } = authSlice.actions;
 
-export default loginSlice.reducer;
+export default authSlice.reducer;

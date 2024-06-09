@@ -1,5 +1,4 @@
 import { Middleware } from '@reduxjs/toolkit';
-import { RootState } from '../store/store';
 import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
@@ -7,7 +6,7 @@ interface DecodedToken {
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export const loginMW: Middleware<{}, RootState> = (storeApi) => (next) => (action) => {
+export const loginMW: Middleware = (storeApi) => (next) => (action) => {
   const result = next(action);
   // getting only the token from the store, and saving as JSON to local storage
   const tokenState = storeApi.getState().login.token;

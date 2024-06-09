@@ -13,15 +13,19 @@ export const loginValSchema = yup.object({
 export const signUpValSchema = yup.object({
   email: yup.string().trim().email().required('Email is required'),
   password: yup.string().trim().required('Password is required'),
-  repeatPassword: yup
-    .string()
-    .trim()
-    .oneOf([yup.ref('password'), undefined], 'Passwords do not match')
-    .required('Repeat password is required'),
+  // repeatPassword: yup
+  //   .string()
+  //   .trim()
+  //   .oneOf([yup.ref('password'), undefined], 'Passwords do not match')
+  //   .required('Repeat password is required'),
 });
 
 export const expensesValSchema = yup.object({
-  title: yup.string().trim().required('Title is required'),
+  // title: yup.string().trim().required('Title is required'),
   description: yup.string().trim().required('Description is required'),
   amount: yup.number().required('Amount is required'),
+});
+
+export const searchValSchema = yup.object({
+  search: yup.string().trim().required('Search is required'),
 });

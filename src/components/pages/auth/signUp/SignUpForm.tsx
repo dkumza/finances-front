@@ -1,10 +1,17 @@
-import { useFormik } from 'formik';
+import { FormikValues, useFormik } from 'formik';
 import { Button } from '../../../inputs/Button';
 import { Input } from '../../../inputs/Input';
 import { signUpValSchema } from '../validationSchemas';
+import { useAppDispatch } from '../../../../store/hooks';
+import { signUp } from '../../../../store/actions/authActions';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export const SignUpForm = () => {
-  const formik = useFormik({
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const formik = useFormik<FormikValues>({
     initialValues: {
       email: '',
       password: '',
@@ -12,7 +19,15 @@ export const SignUpForm = () => {
     },
     validationSchema: signUpValSchema,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(signUp(values))
+        .then(() => {
+          navigate('/login');
+          toast.success('Account created successfully');
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          console.error('Error while signing up: ', rejectedValueOrSerializedError);
+          toast.error('Error creating account');
+        });
     },
   });
 
@@ -34,12 +49,6 @@ export const SignUpForm = () => {
             placeholder='Password'
             formik={formik}
           />
-          {/* <Input
-            type='password'
-            name='repeatPassword'
-            placeholder='Repeat Password'
-            formik={formik}
-          /> */}
           <Button action={() => {}} text='Sign Up' color='btn-accent' />
         </div>
         <p className='text-xs text-right py-2'>* By registering, I confirm that I accept...</p>

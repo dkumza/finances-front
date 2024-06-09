@@ -23,7 +23,6 @@ export const Select = ({ color, name, formik }: SelectProps) => {
         },
       })
       .then((response) => {
-        console.log('response: ', response.data);
         setCategories(Object.values(response.data));
       })
       .catch((error) => {
@@ -44,7 +43,7 @@ export const Select = ({ color, name, formik }: SelectProps) => {
       </option>
       {categories &&
         categories.map((category, index) => (
-          <option className='' key={index}>
+          <option className='capitalize py-2' key={index} value={category}>
             {category}
           </option>
         ))}

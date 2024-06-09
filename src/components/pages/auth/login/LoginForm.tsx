@@ -1,28 +1,12 @@
 import { useFormik } from 'formik';
 import { Button } from '../../../inputs/Button';
-import { Input } from '../../../inputs/Input';
+import { FormValues, Input } from '../../../inputs/Input';
 import { loginValSchema } from '../validationSchemas';
 import { useDispatch } from 'react-redux';
-import { login } from '../../../../store/actions/loginActions';
+import { login } from '../../../../store/actions/authActions';
 import { AppDispatch } from '../../../../store/store';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-interface LoginResult {
-  type: 'login/loginUser/fulfilled' | 'login/loginUser/rejected';
-  payload: {
-    response?: {
-      data?: {
-        message: string;
-      };
-    };
-  };
-}
-
-interface FormValues {
-  email?: string;
-  password?: string;
-}
 
 export const LoginForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -35,16 +19,15 @@ export const LoginForm = () => {
     },
     validationSchema: loginValSchema,
     onSubmit: (values) => {
-      dispatch(login(values)).then((result: LoginResult) => {
-        if (result.type === 'login/loginUser/fulfilled') {
-          toast.success('Login successful');
+      dispatch(login(values))
+        .then(() => {
           navigate('/');
-        }
-        if (result.type === 'login/loginUser/rejected') {
-          console.log('login result error: ', result.payload.response?.data?.message);
-          toast.error(result.payload.response?.data?.message);
-        }
-      });
+          toast.success('Login successful');
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          console.error('Error while logging in: ', rejectedValueOrSerializedError);
+          toast.error('Error creating expense');
+        });
     },
   });
 

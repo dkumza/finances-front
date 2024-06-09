@@ -1,18 +1,12 @@
 import { useFormik } from 'formik';
 import { expensesValSchema } from '../auth/validationSchemas';
-import { Input } from '../../inputs/Input';
+import { FormValues, Input } from '../../inputs/Input';
 import { Button } from '../../inputs/Button';
 import { Select } from '../../inputs/Select';
 import { AppDispatch } from '../../../store/store';
 import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
-
-interface FormValues {
-  category?: string;
-  title?: string;
-  description?: string;
-  amount?: number;
-}
+import { toast } from 'react-toastify';
 
 export const ExpensesForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -20,14 +14,23 @@ export const ExpensesForm = () => {
   const formik = useFormik<FormValues>({
     initialValues: {
       category: '',
-      title: '',
       description: '',
-      amount: 0,
+      amount: null,
     },
     validationSchema: expensesValSchema,
     onSubmit: (values) => {
       console.log('values: ', values);
-      dispatch(createExpense(values));
+      dispatch(createExpense(values))
+        .then(() => {
+          // The createExpense action has been fulfilled
+          toast.success('Expense created successfully');
+          formik.resetForm();
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          // The createExpense action has been rejected
+          console.error('Error creating expense: ', rejectedValueOrSerializedError);
+          toast.error('Error creating expense');
+        });
     },
   });
 
@@ -36,13 +39,6 @@ export const ExpensesForm = () => {
       <form className='w-full' onSubmit={formik.handleSubmit}>
         <div className='flex flex-col gap-4'>
           <Select color='select-primary' name='category' formik={formik} />
-          <Input
-            color='input-primary'
-            type='text'
-            name='title'
-            placeholder='Title'
-            formik={formik}
-          />
           <Input
             color='input-primary'
             type='text'

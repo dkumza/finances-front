@@ -24,6 +24,7 @@ export const ExpensesForm = () => {
         .then(() => {
           // The createExpense action has been fulfilled
           toast.success('Expense created successfully');
+          formik.resetForm();
         })
         .catch((rejectedValueOrSerializedError) => {
           // The createExpense action has been rejected

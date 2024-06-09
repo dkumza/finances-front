@@ -4,13 +4,13 @@ import { createExpense } from '../actions/expensesActions';
 export interface ExpenseState {
   expense: string;
   expensesStatus: boolean;
-  error: string | null;
+  error: string | undefined;
 }
 
 export const initialState: ExpenseState = {
   expense: '',
   expensesStatus: false,
-  error: null,
+  error: undefined,
 };
 
 export const expensesSlice = createSlice({
@@ -25,11 +25,11 @@ export const expensesSlice = createSlice({
       .addCase(createExpense.fulfilled, (state, { payload }) => {
         state.expensesStatus = false;
         state.expense = payload;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(createExpense.rejected, (state, action) => {
         state.expensesStatus = false;
-        state.error = (action.payload as { message: string }).message;
+        state.error = action.error.message;
       });
   },
 });

@@ -8,17 +8,6 @@ import { AppDispatch } from '../../../../store/store';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-interface LoginResult {
-  type: 'login/loginUser/fulfilled' | 'login/loginUser/rejected';
-  payload: {
-    response?: {
-      data?: {
-        message: string;
-      };
-    };
-  };
-}
-
 interface FormValues {
   email?: string;
   password?: string;
@@ -35,16 +24,18 @@ export const LoginForm = () => {
     },
     validationSchema: loginValSchema,
     onSubmit: (values) => {
-      dispatch(login(values)).then((result: LoginResult) => {
-        if (result.type === 'login/loginUser/fulfilled') {
-          toast.success('Login successful');
+      dispatch(login(values))
+        .then((unwrapResult) => {
+          // The login action has been fulfilled
+          console.log('Login success: ', unwrapResult.payload);
+          // toast.success('Login successful');
           navigate('/');
-        }
-        if (result.type === 'login/loginUser/rejected') {
-          console.log('login result error: ', result.payload.response?.data?.message);
-          toast.error(result.payload.response?.data?.message);
-        }
-      });
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          // The login action has been rejected
+          console.error('Error while logging in: ', rejectedValueOrSerializedError);
+          toast.error('Error creating expense');
+        });
     },
   });
 

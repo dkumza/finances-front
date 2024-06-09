@@ -21,7 +21,7 @@ export const signUpValSchema = yup.object({
 });
 
 export const expensesValSchema = yup.object({
-  title: yup.string().trim().required('Title is required'),
+  // title: yup.string().trim().required('Title is required'),
   description: yup.string().trim().required('Description is required'),
   amount: yup.number().required('Amount is required'),
 });

@@ -14,7 +14,7 @@ export const createExpense = createAsyncThunk<string, object, { rejectValue: MyR
       });
       const { data } = response;
       console.log('data: ', data);
-      return data;
+      return data._id;
     } catch (error) {
       console.error('error: ', error);
       return handleAxiosError(error, thunkAPI);

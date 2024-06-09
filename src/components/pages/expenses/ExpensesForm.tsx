@@ -8,21 +8,8 @@ import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
 
-interface ExpenseResult {
-  type: 'expenses/createExpense/fulfilled' | 'expenses/createExpense/rejected';
-  payload: {
-    _id?: string;
-    response?: {
-      data?: {
-        message: string;
-      };
-    };
-  };
-}
-
 interface FormValues {
   category?: string;
-  title?: string;
   description?: string;
   amount?: number;
 }
@@ -33,24 +20,23 @@ export const ExpensesForm = () => {
   const formik = useFormik<FormValues>({
     initialValues: {
       category: '',
-      title: '',
       description: '',
       amount: 0,
     },
     validationSchema: expensesValSchema,
     onSubmit: (values) => {
       console.log('values: ', values);
-      dispatch(createExpense(values)).then((result: ExpenseResult) => {
-        if (result.type === 'expenses/createExpense/fulfilled') {
-          const { _id } = result.payload;
-          console.log('new created expense id: ', _id);
-          toast.success('Expense created');
-        }
-        if (result.type === 'expenses/createExpense/rejected') {
-          console.log('error creating expense', result.payload.response?.data?.message);
-          toast.error(result.payload.response?.data?.message);
-        }
-      });
+      dispatch(createExpense(values))
+        .then((unwrapResult) => {
+          // The createExpense action has been fulfilled
+          console.log('Expense created with id: ', unwrapResult.payload);
+          toast.success('Expense created successfully');
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          // The createExpense action has been rejected
+          console.error('Error creating expense: ', rejectedValueOrSerializedError);
+          toast.error('Error creating expense');
+        });
     },
   });
 
@@ -62,18 +48,10 @@ export const ExpensesForm = () => {
           <Input
             color='input-primary'
             type='text'
-            name='title'
-            placeholder='Title'
-            formik={formik}
-          />
-          <Input
-            color='input-primary'
-            type='text'
             name='description'
             placeholder='Description'
             formik={formik}
           />
-
           <Input
             color='input-primary'
             type='number'
@@ -81,7 +59,7 @@ export const ExpensesForm = () => {
             placeholder='Amount'
             formik={formik}
           />
-          <Button action={() => { }} text='Submit' color='btn-primary' />
+          <Button action={() => {}} text='Submit' color='btn-primary' />
         </div>
       </form>
     </div>

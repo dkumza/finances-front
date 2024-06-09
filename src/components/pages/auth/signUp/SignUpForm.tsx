@@ -39,12 +39,6 @@ export const SignUpForm = () => {
             placeholder='Password'
             formik={formik}
           />
-          {/* <Input
-            type='password'
-            name='repeatPassword'
-            placeholder='Repeat Password'
-            formik={formik}
-          /> */}
           <Button action={() => {}} text='Sign Up' color='btn-accent' />
         </div>
         <p className='text-xs text-right py-2'>* By registering, I confirm that I accept...</p>

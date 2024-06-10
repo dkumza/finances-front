@@ -1,11 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createExpense, fetchExpenses } from '../actions/expensesActions';
 
+export interface Transaction {
+  _id: string;
+  category: string;
+  description: string;
+  amount: number;
+  createdAt: string;
+}
+
 export interface Expense {
   balance: number;
   totalExpense: number;
   totalIncome: number;
-  transactions: object[];
+  transactions: Transaction[];
 }
 
 export interface ExpenseState {
@@ -27,7 +35,7 @@ export const initialState: ExpenseState = {
         category: '',
         description: '',
         amount: 0,
-        date: '',
+        createdAt: '',
       },
     ],
   },

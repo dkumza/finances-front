@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { MyRejectValue, handleAxiosError } from '../../helpers/handleAxiosError';
 import { FormValues } from '../../components/inputs/Input';
+import { Expense } from '../slices/expensesSlice';
 
 const EXP_URL = 'http://127.0.0.1:3000/expenses';
 const token = localStorage.getItem('token');
@@ -26,7 +27,7 @@ export const createExpense = createAsyncThunk<string, FormValues, { rejectValue:
   }
 );
 
-export const fetchExpenses = createAsyncThunk<string, void, { rejectValue: MyRejectValue }>(
+export const fetchExpenses = createAsyncThunk<Expense, object, { rejectValue: MyRejectValue }>(
   'expenses/fetchExpenses',
   async (_, thunkAPI) => {
     try {

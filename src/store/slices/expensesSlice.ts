@@ -21,7 +21,15 @@ export const initialState: ExpenseState = {
     balance: 0,
     totalExpense: 0,
     totalIncome: 0,
-    transactions: [],
+    transactions: [
+      {
+        _id: '',
+        category: '',
+        description: '',
+        amount: 0,
+        date: '',
+      },
+    ],
   },
   expensesStatus: 'idle',
   error: undefined,

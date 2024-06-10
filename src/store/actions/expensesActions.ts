@@ -27,7 +27,7 @@ export const createExpense = createAsyncThunk<string, FormValues, { rejectValue:
   }
 );
 
-export const fetchExpenses = createAsyncThunk<Expense, object, { rejectValue: MyRejectValue }>(
+export const fetchExpenses = createAsyncThunk<Expense, void, { rejectValue: MyRejectValue }>(
   'expenses/fetchExpenses',
   async (_, thunkAPI) => {
     try {

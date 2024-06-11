@@ -16,7 +16,10 @@ export const DashContainer = () => {
       <DashNavBar />
       <div className='p-6 bg-base-200'>
         <DashOverview />
-        <ExpensesAll />
+        <div className='flex gap-6 flex-col xl:flex-row'>
+          <ExpensesAll />
+          <ExpensesAll />
+        </div>
         <ExpensesAddButton />
       </div>
     </div>

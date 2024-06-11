@@ -5,6 +5,7 @@ export interface Transaction {
   _id: string;
   category: string;
   description: string;
+  date: string;
   amount: number;
   createdAt: string;
 }
@@ -34,6 +35,7 @@ export const initialState: ExpenseState = {
         _id: '',
         category: '',
         description: '',
+        date: '',
         amount: 0,
         createdAt: '',
       },

@@ -18,7 +18,6 @@ export const createExpense = createAsyncThunk<string, FormValues, { rejectValue:
         headers: { Authorization: `Bearer ${token}` },
       });
       const { data } = response;
-      console.log('data: ', data);
       return data._id;
     } catch (error) {
       console.error('error: ', error);
@@ -35,7 +34,6 @@ export const fetchExpenses = createAsyncThunk<Expense, void, { rejectValue: MyRe
         headers: { Authorization: `Bearer ${token}` },
       });
       const { data } = response;
-      console.log('data: ', data);
       return data;
     } catch (error) {
       console.error('error: ', error);

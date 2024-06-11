@@ -11,20 +11,19 @@ export const DashOverview = () => {
   const { balance, totalExpense, totalIncome } = useAppSelector(
     (state) => state.expenses.fetchedExpenses
   );
-  console.log('balance: ', balance, totalExpense, totalIncome);
   return (
     <div className=''>
       <div className='text-lg'>Overview</div>
-      <div className='flex gap-6'>
+      <div className='flex gap-6 flex-col lg:flex-row'>
         <BudgetOverview color='bg-accent' title='Balance' amount={balance} icon={<BalanceIcon />} />
         <BudgetOverview
-          color='bg-error'
+          color='bg-secondary'
           title='Expenses'
           amount={totalExpense}
           icon={<ExpensesIcon />}
         />
         <BudgetOverview
-          color='bg-success'
+          color='bg-primary'
           title='Income'
           amount={totalIncome}
           icon={<IncomeIcon />}

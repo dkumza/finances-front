@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { MyRejectValue, handleAxiosError } from '../../helpers/handleAxiosError';
 import { FormValues } from '../../components/inputs/Input';
+import { Expense } from '../slices/expensesSlice';
 
 const EXP_URL = 'http://127.0.0.1:3000/expenses';
 const token = localStorage.getItem('token');
@@ -17,7 +18,6 @@ export const createExpense = createAsyncThunk<string, FormValues, { rejectValue:
         headers: { Authorization: `Bearer ${token}` },
       });
       const { data } = response;
-      console.log('data: ', data);
       return data._id;
     } catch (error) {
       console.error('error: ', error);
@@ -26,7 +26,7 @@ export const createExpense = createAsyncThunk<string, FormValues, { rejectValue:
   }
 );
 
-export const fetchExpenses = createAsyncThunk<string, void, { rejectValue: MyRejectValue }>(
+export const fetchExpenses = createAsyncThunk<Expense, void, { rejectValue: MyRejectValue }>(
   'expenses/fetchExpenses',
   async (_, thunkAPI) => {
     try {
@@ -34,7 +34,6 @@ export const fetchExpenses = createAsyncThunk<string, void, { rejectValue: MyRej
         headers: { Authorization: `Bearer ${token}` },
       });
       const { data } = response;
-      console.log('data: ', data);
       return data;
     } catch (error) {
       console.error('error: ', error);

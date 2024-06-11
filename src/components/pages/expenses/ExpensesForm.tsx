@@ -15,6 +15,7 @@ export const ExpensesForm = () => {
     initialValues: {
       category: '',
       description: '',
+      date: '',
       amount: null,
     },
     validationSchema: expensesValSchema,
@@ -44,6 +45,13 @@ export const ExpensesForm = () => {
             type='text'
             name='description'
             placeholder='Description'
+            formik={formik}
+          />
+          <Input
+            color='input-primary'
+            type='date'
+            name='date'
+            placeholder='Pick a date'
             formik={formik}
           />
           <Input

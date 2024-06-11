@@ -6,6 +6,7 @@ export interface FormValues {
   category?: string;
   title?: string;
   description?: string;
+  date?: string;
   amount?: number | null;
   search?: string;
   // repeatPassword: undefined;

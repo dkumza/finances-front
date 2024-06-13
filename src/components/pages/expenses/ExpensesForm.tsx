@@ -22,10 +22,16 @@ export const ExpensesForm = () => {
     onSubmit: (values) => {
       console.log('values: ', values);
       dispatch(createExpense(values))
-        .then(() => {
+        .then((res) => {
           // The createExpense action has been fulfilled
-          toast.success('Expense created successfully');
-          formik.resetForm();
+          if (res.type === 'expenses/createExpense/fulfilled') {
+            toast.success('Expense created successfully');
+            formik.resetForm();
+          }
+          // The createExpense action has been rejected
+          if (res.type === 'expenses/createExpense/rejected') {
+            toast.error('Failed to create expense');
+          }
         })
         .catch((rejectedValueOrSerializedError) => {
           // The createExpense action has been rejected

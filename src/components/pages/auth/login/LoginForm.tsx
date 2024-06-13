@@ -20,9 +20,14 @@ export const LoginForm = () => {
     validationSchema: loginValSchema,
     onSubmit: (values) => {
       dispatch(login(values))
-        .then(() => {
-          navigate('/');
-          toast.success('Login successful');
+        .then((res) => {
+          if (res.type === 'auth/loginUser/fulfilled') {
+            navigate('/');
+            toast.success('Login successful');
+          }
+          if (res.type === 'auth/loginUser/rejected') {
+            toast.error('Failed to login!');
+          }
         })
         .catch((rejectedValueOrSerializedError) => {
           console.error('Error while logging in: ', rejectedValueOrSerializedError);

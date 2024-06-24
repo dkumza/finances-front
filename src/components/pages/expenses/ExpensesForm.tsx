@@ -21,23 +21,20 @@ export const ExpensesForm = () => {
     validationSchema: expensesValSchema,
     onSubmit: (values) => {
       console.log('values: ', values);
-      dispatch(createExpense(values))
-        .then((res) => {
-          // The createExpense action has been fulfilled
-          if (res.type === 'expenses/createExpense/fulfilled') {
-            toast.success('Expense created successfully');
-            formik.resetForm();
-          }
-          // The createExpense action has been rejected
-          if (res.type === 'expenses/createExpense/rejected') {
-            toast.error('Failed to create expense');
-          }
-        })
-        .catch((rejectedValueOrSerializedError) => {
-          // The createExpense action has been rejected
-          console.error('Error creating expense: ', rejectedValueOrSerializedError);
-          toast.error('Error creating expense');
-        });
+      dispatch(createExpense(values)).then((res) => {
+        // The createExpense action has been fulfilled
+        if (res.type === 'expenses/createExpense/fulfilled') {
+          toast.success('Expense created successfully');
+          formik.resetForm();
+          return;
+        }
+        // The createExpense action has been rejected
+        if (res.type === 'expenses/createExpense/rejected') {
+          toast.error('Failed to create expense');
+          return;
+        }
+        console.log('Expenses Error: ', res);
+      });
     },
   });
 

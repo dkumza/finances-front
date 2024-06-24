@@ -28,9 +28,9 @@ export const DashNavBar = () => {
     toast.success('Logged out');
   };
   return (
-    <div className='navbar bg-base-100 px-4 border'>
+    <div className='navbar bg-base-100 px-4'>
       <div className='flex-1'>
-        <div className='flex-none'>
+        <div className='flex-none lg:hidden max-sm:block'>
           <DashDrawer />
         </div>
         <div className='form-control'>

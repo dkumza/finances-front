@@ -3,6 +3,7 @@ import { useAppSelector } from '../../../store/hooks';
 
 export const ExpensesAll = () => {
   const { transactions } = useAppSelector((state) => state.expenses.fetchedExpenses);
+
   return (
     <div className='mt-6'>
       <div className='card w-full bg-base-100 shadow rounded-xl'>

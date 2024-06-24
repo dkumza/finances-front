@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../../store/hooks';
 import { fetchExpenses } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
 import { logout } from '../../../store/slices/authSlice';
+import { DashSideNav } from './dashDrawer/DashSideNav';
 
 export const DashContainer = () => {
   const dispatch = useAppDispatch();
@@ -31,15 +32,20 @@ export const DashContainer = () => {
     });
   }, [dispatch]);
   return (
-    <div className='flex flex-col w-full'>
-      <DashNavBar />
-      <div className='p-6 bg-base-200'>
-        <DashOverview />
-        <div className='flex gap-6 flex-col xl:flex-row'>
-          <ExpensesAll />
-          <ExpensesAll />
+    <div className='w-full flex border min-h-screen'>
+      <div className='max-lg:hidden'>
+        <DashSideNav />
+      </div>
+      <div className='flex flex-col w-full'>
+        <DashNavBar />
+        <div className='p-6 bg-base-200 h-full'>
+          <DashOverview />
+          <div className='flex gap-6 flex-col xl:flex-row'>
+            <ExpensesAll />
+            <ExpensesAll />
+          </div>
+          <ExpensesAddButton />
         </div>
-        <ExpensesAddButton />
       </div>
     </div>
   );

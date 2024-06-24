@@ -6,7 +6,7 @@ export const ExpensesAll = () => {
 
   return (
     <div className='mt-6'>
-      <div className='card w-full bg-base-100 shadow rounded-xl'>
+      <div className='card w-full bg-base-100 shadow'>
         <div className='card-body'>
           <div className=''>Recent Transactions</div>
           <table className='table table-sm'>

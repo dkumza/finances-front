@@ -40,7 +40,7 @@ export const DashNavBar = () => {
       <div className='flex-none gap-2'>
         <div className='dropdown dropdown-end'>
           <div tabIndex={0} role='button' className='btn btn-ghost btn-circle avatar'>
-            <div className='w-10 h-10 rounded-full bg-base-300'>
+            <div className='w-10 h-10 rounded-xl bg-base-300'>
               <div className='h-10 align-middle flex items-center justify-center'>A</div>
             </div>
           </div>

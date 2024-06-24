@@ -26,3 +26,7 @@
     background: #65c3c8;
 }
 
+.btn, .input {
+    @apply rounded-xl
+}
+

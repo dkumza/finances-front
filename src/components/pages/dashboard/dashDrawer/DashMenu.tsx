@@ -1,4 +1,5 @@
 import {
+  AllTransactionsIcon,
   BillsIcon,
   BudgetIcon,
   DashIcon,
@@ -20,6 +21,7 @@ export const DashMenu = () => {
         <li className=''>
           <DashNavItem icon={<ExpensesIcon />} text='Expenses' link={'/home'} />
           <DashNavItem icon={<IncomeIcon />} text='Income' link={'/home'} />
+          <DashNavItem icon={<AllTransactionsIcon />} text='Transactions' link={'/home'} />
         </li>
         <div className='font-semibold text-neutral-500 mt-2'>Financial Control</div>
         <li>

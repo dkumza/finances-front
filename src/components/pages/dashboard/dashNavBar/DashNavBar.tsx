@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
 import { FormValues, Input } from '../../../inputs/Input';
-import { HamburgerIcon } from '../../../../assets/svg/svgIcons';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../../store/hooks';
 import { logout } from '../../../../store/slices/authSlice';
 import { toast } from 'react-toastify';
+import { DashDrawer } from '../dashDrawer/DashDrawer';
 // import { searchValSchema } from '../../auth/validationSchemas';
 
 export const DashNavBar = () => {
@@ -31,9 +31,7 @@ export const DashNavBar = () => {
     <div className='navbar bg-base-100 px-4 border'>
       <div className='flex-1'>
         <div className='flex-none'>
-          <button className='btn btn-square btn-ghost mr-2'>
-            <HamburgerIcon />
-          </button>
+          <DashDrawer />
         </div>
         <div className='form-control'>
           <Input type='text' name='search' placeholder='Search' color='' formik={formik} />

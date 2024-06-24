@@ -16,6 +16,12 @@
     }
 }
 
+@layer components {
+    html:has(.drawer-auto-gutter .drawer-toggle:checked) {
+        scrollbar-gutter: auto;
+    }
+}
+
 .Toastify__progress-bar--success {
     background: #65c3c8;
 }

@@ -15,12 +15,22 @@ function App() {
     <div className='flex flex-col items-center align-middle'>
       <ToastThemed />
       <Routes>
-        <Route path='/login' element={token ? <Navigate to='/' /> : <LoginPage />} />
-        <Route path='/signup' element={token ? <Navigate to='/' /> : <SignUpPage />} />
-        {/* <Route path='/' element={token ? <Home /> : <Navigate to='/login' />} /> */}
-        <Route path='/' element={token ? <DashContainer /> : <Navigate to='/login' />} />
-        <Route path='/expenses' element={!token ? <Navigate to='/' /> : <ExpensesPage />} />
-        {/* <Route path='/expenses-all' element={<ExpensesAll />} /> */}
+        <Route
+          path='/login'
+          element={token ? <Navigate to='/' /> : <LoginPage />}
+        />
+        <Route
+          path='/signup'
+          element={token ? <Navigate to='/' /> : <SignUpPage />}
+        />
+        <Route
+          path='/expenses'
+          element={!token ? <Navigate to='/' /> : <ExpensesPage />}
+        />
+        <Route
+          path='/*'
+          element={token ? <DashContainer /> : <Navigate to='/login' />}
+        />
         {/* 404 route */}
         <Route path='*' element={<PageNotFound />} />
       </Routes>

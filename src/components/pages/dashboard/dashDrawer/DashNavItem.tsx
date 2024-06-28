@@ -9,10 +9,7 @@ interface DashNavItemProps {
 
 export const DashNavItem: FC<DashNavItemProps> = ({ icon, text, link }) => {
   return (
-    <NavLink
-      to={link}
-      className={({ isActive }) => (isActive ? 'bg-base-content text-white hover:text-black' : '')}
-    >
+    <NavLink to={link} className={({ isActive }) => (isActive ? 'active' : '')}>
       <div className=''>{icon}</div>
       <div>{text}</div>
     </NavLink>

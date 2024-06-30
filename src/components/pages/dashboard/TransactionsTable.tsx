@@ -1,14 +1,26 @@
+import { FC } from 'react';
 import { EyeIcon, TrashIcon } from '../../../assets/svg/svgIcons';
-import { useAppSelector } from '../../../store/hooks';
 
-export const ExpensesAll = () => {
-  const { transactions } = useAppSelector((state) => state.expenses.fetchedExpenses);
+interface ITransactionProps {
+  transactions: {
+    _id: string;
+    category: string;
+    description: string;
+    amount: number;
+    date: string;
+  }[];
+  title: string;
+}
 
+export const TransactionsTable: FC<ITransactionProps> = ({
+  title,
+  transactions,
+}) => {
   return (
     <div className='mt-6'>
       <div className='card w-full bg-base-100 shadow'>
         <div className='card-body'>
-          <div className=''>Recent Transactions</div>
+          <div className=''>{title}</div>
           <table className='table table-sm'>
             <thead className=''>
               <tr>
@@ -36,7 +48,8 @@ export const ExpensesAll = () => {
                     </div>
                   </td>
                   <td>
-                    {transaction.date && new Date(transaction.date).toISOString().split('T')[0]}
+                    {transaction.date &&
+                      new Date(transaction.date).toISOString().split('T')[0]}
                   </td>
                   <td>
                     <div className='flex gap-2'>

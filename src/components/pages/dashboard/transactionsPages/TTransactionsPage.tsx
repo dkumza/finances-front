@@ -1,3 +1,19 @@
+import { useAppSelector } from '../../../../store/hooks';
+import { TransactionsTable } from '../TransactionsTable';
+
 export const TTransactionsPage = () => {
-  return <div>TransactionsPage</div>;
+  const { transactions } = useAppSelector(
+    (state) => state.expenses.fetchedExpenses
+  );
+  return (
+    <>
+      <div>ExpensesPage</div>
+      {transactions && (
+        <TransactionsTable
+          title='All Transactions'
+          transactions={transactions}
+        />
+      )}
+    </>
+  );
 };

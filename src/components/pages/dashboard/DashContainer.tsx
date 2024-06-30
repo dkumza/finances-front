@@ -14,22 +14,32 @@ import { TTransactionsPage } from './transactionsPages/TTransactionsPage';
 import { BudgetsPAge } from './financialControlPages/BudgetsPAge';
 import { BillsPage } from './financialControlPages/BillsPage';
 import { SavingsPage } from './financialControlPages/SavingsPage';
+import { setExpenses } from '../../../store/slices/expensesSlice';
 
 export const DashContainer = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchExpenses()).then((res) => {
+      console.log('fetchExpenses res: ', res.payload);
       if (res.type === 'expenses/fetchExpenses/fulfilled') {
-        console.log('fetchExpenses fulfilled');
+        dispatch(setExpenses(res.payload));
         return;
       }
       if (res.type === 'expenses/fetchExpenses/rejected') {
         console.error('fetchExpenses rejected');
         const errorInfo = res.payload as { message: string; status: number };
+
+        console.error('fetchExpenses Error: ', errorInfo);
         if (errorInfo && errorInfo.status === 401) {
-          console.log('Unauthorized');
+          console.error('Unauthorized');
           dispatch(logout());
           toast.error('Session expired');
+          return;
+        }
+
+        if (errorInfo && errorInfo.status === undefined) {
+          dispatch(logout());
+          toast.error('Something went wrong');
           return;
         }
         return;

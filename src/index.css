@@ -20,6 +20,9 @@
     html:has(.drawer-auto-gutter .drawer-toggle:checked) {
         scrollbar-gutter: auto;
     }
+    html {
+        scrollbar-gutter: auto !important;
+      }
 }
 
 .Toastify__progress-bar--success {

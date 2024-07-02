@@ -14,7 +14,7 @@ export const LoginForm = () => {
 
   const formik = useFormik<FormValues>({
     initialValues: {
-      email: 'darius@email.com',
+      email: 'darius@darius.eu',
       password: '123456',
     },
     validationSchema: loginValSchema,

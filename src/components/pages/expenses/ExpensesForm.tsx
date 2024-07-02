@@ -38,6 +38,12 @@ export const ExpensesForm = () => {
     },
   });
 
+  const handleCancel = () => {
+    formik.resetForm();
+    const modal = document.getElementById('exp_modal');
+    modal && modal.close();
+  };
+
   return (
     <div className='container flex items-center justify-center flex-col'>
       <form className='w-full' onSubmit={formik.handleSubmit}>
@@ -65,6 +71,7 @@ export const ExpensesForm = () => {
             formik={formik}
           />
           <Button action={() => {}} text='Submit' color='btn-primary' />
+          <Button action={handleCancel} text='Cancel' color='btn-base-200' />
         </div>
       </form>
     </div>

@@ -15,6 +15,7 @@ import { BudgetsPAge } from './financialControlPages/BudgetsPAge';
 import { BillsPage } from './financialControlPages/BillsPage';
 import { SavingsPage } from './financialControlPages/SavingsPage';
 import { setExpenses } from '../../../store/slices/expensesSlice';
+import { ExpensesFormModal } from '../expenses/ExpensesFormModal';
 
 export const DashContainer = () => {
   const dispatch = useAppDispatch();
@@ -47,6 +48,7 @@ export const DashContainer = () => {
       console.log('fetchExpenses Error: ', res);
     });
   }, [dispatch]);
+
   return (
     <div className='w-full flex border min-h-screen'>
       <div className='max-lg:hidden'>
@@ -55,6 +57,7 @@ export const DashContainer = () => {
       <div className='flex flex-col w-full'>
         <DashNavBar />
         <div className='p-6 bg-base-200 h-full'>
+          {<ExpensesFormModal />}
           <Routes>
             <Route path='/' element={<DashPage />} />
             <Route path='expenses-all' element={<TExpensesPage />} />

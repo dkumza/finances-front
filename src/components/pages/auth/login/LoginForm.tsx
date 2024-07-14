@@ -52,7 +52,12 @@ export const LoginForm = () => {
             placeholder='Password'
             formik={formik}
           />
-          <Button action={() => {}} text='Log in' color='btn-primary' />
+          <Button
+            type='submit'
+            action={() => {}}
+            text='Log in'
+            color='btn-primary'
+          />
         </div>
       </form>
     </div>

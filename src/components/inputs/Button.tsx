@@ -2,7 +2,7 @@ import { MouseEventHandler } from 'react';
 
 interface ButtonProps {
   action: MouseEventHandler<HTMLButtonElement>;
-  type?: 'submit' | 'button';
+  type?: 'submit' | 'button' | 'reset';
   text: string;
   color: string;
 }

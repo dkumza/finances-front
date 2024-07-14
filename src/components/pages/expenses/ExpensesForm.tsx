@@ -8,9 +8,8 @@ import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
 
-const modal = document.getElementById('exp_modal');
-
 export const ExpensesForm = () => {
+  const modal = document.getElementById('exp_modal');
   const dispatch: AppDispatch = useDispatch();
 
   const formik = useFormik<FormValues>({
@@ -80,7 +79,7 @@ export const ExpensesForm = () => {
           />
           <Button
             action={handleCancel}
-            type='cancel'
+            type='button'
             text='Cancel'
             color='btn-base-200'
           />

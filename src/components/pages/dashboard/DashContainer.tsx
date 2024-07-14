@@ -12,6 +12,7 @@ import { BillsPage } from './financialControlPages/BillsPage';
 import { SavingsPage } from './financialControlPages/SavingsPage';
 import { ExpensesFormModal } from '../expenses/ExpensesFormModal';
 import { handleExpenses } from '../../../helpers/handleExpenses';
+import { ExpensesDeleteModal } from '../expenses/ExpensesDeleteModal';
 
 export const DashContainer = () => {
   useEffect(() => {
@@ -26,7 +27,8 @@ export const DashContainer = () => {
       <div className='flex flex-col w-full'>
         <DashNavBar />
         <div className='p-6 bg-base-200 h-full'>
-          {<ExpensesFormModal />}
+          <ExpensesFormModal />
+          <ExpensesDeleteModal />
           <Routes>
             <Route path='/' element={<DashPage />} />
             <Route path='expenses-all' element={<TExpensesPage />} />

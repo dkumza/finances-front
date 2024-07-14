@@ -3,15 +3,14 @@ import { expensesValSchema } from '../auth/validationSchemas';
 import { FormValues, Input } from '../../inputs/Input';
 import { Button } from '../../inputs/Button';
 import { Select } from '../../inputs/Select';
-import { AppDispatch } from '../../../store/store';
-import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
 import { handleExpenses } from '../../../helpers/handleExpenses';
+import { useAppDispatch } from '../../../store/hooks';
 
 export const ExpensesForm = () => {
-  const modal = document.getElementById('exp_modal') as HTMLDialogElement;
-  const dispatch: AppDispatch = useDispatch();
+  const expModal = document.getElementById('exp_modal') as HTMLDialogElement;
+  const dispatch = useAppDispatch();
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -22,8 +21,7 @@ export const ExpensesForm = () => {
     },
     validationSchema: expensesValSchema,
     onSubmit: (values) => {
-      modal?.close();
-      console.log('values: ', values);
+      expModal?.close();
       dispatch(createExpense(values)).then((res) => {
         // The createExpense action has been fulfilled
         if (res.type === 'expenses/createExpense/fulfilled') {
@@ -42,7 +40,7 @@ export const ExpensesForm = () => {
   });
 
   const handleCancel = () => {
-    modal?.close();
+    expModal.close();
     formik.resetForm();
   };
 

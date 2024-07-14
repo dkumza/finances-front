@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { EyeIcon, TrashIcon } from '../../../assets/svg/svgIcons';
+import { useAppDispatch } from '../../../store/hooks';
+import { setExpenseToDelete } from '../../../store/slices/expensesSlice';
 
 interface ITransactionProps {
   transactions: {
@@ -16,6 +18,17 @@ export const TransactionsTable: FC<ITransactionProps> = ({
   title,
   transactions,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const confModal = document.getElementById(
+    'confirm_modal'
+  ) as HTMLDialogElement;
+
+  const prepForDelete = (id: string) => {
+    console.log('cofModal: ', confModal);
+    confModal?.showModal();
+    dispatch(setExpenseToDelete(id));
+  };
   return (
     <div className='mt-6'>
       <div className='card w-full bg-base-100 shadow'>
@@ -56,7 +69,10 @@ export const TransactionsTable: FC<ITransactionProps> = ({
                       <div className='cursor-pointer'>
                         <EyeIcon />
                       </div>
-                      <div className='text-red-400 cursor-pointer'>
+                      <div
+                        className='text-red-400 cursor-pointer'
+                        onClick={() => prepForDelete(transaction._id)}
+                      >
                         <TrashIcon />
                       </div>
                     </div>

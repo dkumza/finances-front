@@ -29,8 +29,7 @@ export const DashNavBar = () => {
   };
 
   const handleShowModal = () => {
-    const modal = document.getElementById('exp_modal') as HTMLDialogElement;
-    modal && modal.showModal();
+    document.getElementById('exp_modal').showModal();
   };
   return (
     <div className='navbar bg-base-100 px-4'>

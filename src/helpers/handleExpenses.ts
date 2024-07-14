@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { fetchExpenses } from '../store/actions/expensesActions';
+import { deleteExpense, fetchExpenses } from '../store/actions/expensesActions';
 import { logout } from '../store/slices/authSlice';
 import { setExpenses } from '../store/slices/expensesSlice';
 import store from '../store/store';
@@ -30,5 +30,19 @@ export const handleExpenses = () => {
       return;
     }
     console.log('fetchExpenses Error: ', res);
+  });
+};
+
+export const handleDeleteTransaction = (id: string) => {
+  store.dispatch(deleteExpense(id)).then((res) => {
+    if (res.type === 'expenses/removeExpense/fulfilled') {
+      toast.success('Transaction deleted successfully');
+      handleExpenses();
+    }
+    if (res.type !== 'expenses/removeExpense/fulfilled') {
+      const errorMessage = `Failed to delete expense. Type: ${res.type}`;
+      toast.error('Failed to delete transaction');
+      throw new Error(errorMessage);
+    }
   });
 };

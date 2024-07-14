@@ -58,3 +58,21 @@ export const fetchExpenses = createAsyncThunk<
     return thunkAPI.rejectWithValue({ message, status });
   }
 });
+
+export const deleteExpense = createAsyncThunk<
+  Expense,
+  string,
+  { state: RootState; rejectValue: MyRejectValue }
+>('expenses/removeExpense', async (id, thunkAPI) => {
+  const token = thunkAPI.getState().login.token;
+  try {
+    const response = await axios.delete(`${EXP_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const { data } = response;
+    return data;
+  } catch (error) {
+    console.error('error: ', error);
+    return handleAxiosError(error, thunkAPI);
+  }
+});

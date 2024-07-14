@@ -56,6 +56,9 @@ export const expensesSlice = createSlice({
     setExpenses: (state, action) => {
       state.fetchedExpenses = action.payload;
     },
+    setExpenseToDelete: (state, action) => {
+      state.expense = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -86,6 +89,6 @@ export const expensesSlice = createSlice({
   },
 });
 
-export const { setExpenses } = expensesSlice.actions;
+export const { setExpenses, setExpenseToDelete } = expensesSlice.actions;
 
 export default expensesSlice.reducer;

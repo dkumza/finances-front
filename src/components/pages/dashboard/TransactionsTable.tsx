@@ -25,7 +25,6 @@ export const TransactionsTable: FC<ITransactionProps> = ({
   ) as HTMLDialogElement;
 
   const prepForDelete = (id: string) => {
-    console.log('cofModal: ', confModal);
     confModal?.showModal();
     dispatch(setExpenseToDelete(id));
   };

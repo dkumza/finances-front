@@ -30,12 +30,12 @@ export const ExpensesDeleteModal = () => {
           <p className='py-4'>
             You are about to delete transaction, this cannot be undone
           </p>
-          <div className='btn-wrapper border flex justify-end gap-2'>
+          <div className='btn-wrapper  flex justify-end gap-2'>
             <button
               className='btn btn-outline w-24'
               onClick={() => handleConfirm(expense)}
             >
-              Delete
+              Confirm
             </button>
             <button className='btn btn-neutral w-24' onClick={handleClose}>
               Cancel

@@ -1,5 +1,4 @@
 import { useAppSelector } from '../../../store/hooks';
-import { ExpensesAddButton } from '../expenses/ExpensesAddButton';
 import { DashOverview } from './dashOverview/DashOverview';
 import { TransactionsTable } from './TransactionsTable';
 
@@ -16,7 +15,6 @@ export const DashPage = () => {
           transactions={transactions}
         />
       </div>
-      <ExpensesAddButton />
     </>
   );
 };

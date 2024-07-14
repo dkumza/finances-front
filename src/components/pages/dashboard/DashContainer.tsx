@@ -11,7 +11,7 @@ import { TExpensesPage } from './transactionsPages/TExpensesPage';
 import { TIncomePage } from './transactionsPages/TIncomePage';
 import { PageNotFound } from '../pageNotFound/PageNotFound';
 import { TTransactionsPage } from './transactionsPages/TTransactionsPage';
-import { BudgetsPAge } from './financialControlPages/BudgetsPAge';
+import { BudgetsPAge } from './financialControlPages/BudgetsPage';
 import { BillsPage } from './financialControlPages/BillsPage';
 import { SavingsPage } from './financialControlPages/SavingsPage';
 import { setExpenses } from '../../../store/slices/expensesSlice';

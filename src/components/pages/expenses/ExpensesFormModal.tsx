@@ -8,7 +8,7 @@ export const ExpensesFormModal: FC = () => {
 
   return (
     <>
-      <dialog id='exp_modal' className='modal'>
+      <dialog id='exp_modal' className='modal z-0'>
         <div className='modal-box flex justify-center '>
           <ExpensesPage />
         </div>

@@ -1,4 +1,4 @@
-export const AuthHeader = ({ h, p }: { h: string; p: string }) => {
+export const FormHeader = ({ h, p }: { h: string; p: string }) => {
   return (
     <div className=''>
       <h1 className='text-4xl font-semibold mb-2 text-left'>{h}</h1>

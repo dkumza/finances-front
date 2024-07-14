@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
 
+const modal = document.getElementById('exp_modal');
+
 export const ExpensesForm = () => {
   const dispatch: AppDispatch = useDispatch();
 
@@ -20,6 +22,7 @@ export const ExpensesForm = () => {
     },
     validationSchema: expensesValSchema,
     onSubmit: (values) => {
+      modal?.close();
       console.log('values: ', values);
       dispatch(createExpense(values)).then((res) => {
         // The createExpense action has been fulfilled
@@ -39,9 +42,8 @@ export const ExpensesForm = () => {
   });
 
   const handleCancel = () => {
+    modal?.close();
     formik.resetForm();
-    const modal = document.getElementById('exp_modal');
-    modal && modal.close();
   };
 
   return (
@@ -70,8 +72,18 @@ export const ExpensesForm = () => {
             placeholder='Amount'
             formik={formik}
           />
-          <Button action={() => {}} text='Submit' color='btn-primary' />
-          <Button action={handleCancel} text='Cancel' color='btn-base-200' />
+          <Button
+            action={() => {}}
+            type='submit'
+            text='Submit'
+            color='btn-primary'
+          />
+          <Button
+            action={handleCancel}
+            type='cancel'
+            text='Cancel'
+            color='btn-base-200'
+          />
         </div>
       </form>
     </div>

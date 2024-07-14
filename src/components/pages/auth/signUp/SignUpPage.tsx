@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../inputs/Button';
-import { AuthHeader } from '../../../UI/Header';
 import { SignUpForm } from './SignUpForm';
+import { FormHeader } from '../../../UI/FormHeader';
 
 export const SignUpPage = () => {
   const navigate = useNavigate();
@@ -13,7 +13,10 @@ export const SignUpPage = () => {
   return (
     <div className='min-h-screen  flex flex-col justify-center items-center md:w-96 w-full'>
       <div className='flex flex-col w-full px-4'>
-        <AuthHeader h='Sign Up' p='Fill up form and press Sign Up button to create an account' />
+        <FormHeader
+          h='Sign Up'
+          p='Fill up form and press Sign Up button to create an account'
+        />
         <SignUpForm />
         <div className='divider'>
           <p className='text-sm'>OR</p>

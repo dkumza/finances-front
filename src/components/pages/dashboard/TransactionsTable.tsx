@@ -1,13 +1,38 @@
+import { FC } from 'react';
 import { EyeIcon, TrashIcon } from '../../../assets/svg/svgIcons';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppDispatch } from '../../../store/hooks';
+import { setExpenseToDelete } from '../../../store/slices/expensesSlice';
 
-export const ExpensesAll = () => {
-  const { transactions } = useAppSelector((state) => state.expenses.fetchedExpenses);
+interface ITransactionProps {
+  transactions: {
+    _id: string;
+    category: string;
+    description: string;
+    amount: number;
+    date: string;
+  }[];
+  title: string;
+}
+
+export const TransactionsTable: FC<ITransactionProps> = ({
+  title,
+  transactions,
+}) => {
+  const dispatch = useAppDispatch();
+
+  const confModal = document.getElementById(
+    'confirm_modal'
+  ) as HTMLDialogElement;
+
+  const prepForDelete = (id: string) => {
+    confModal?.showModal();
+    dispatch(setExpenseToDelete(id));
+  };
   return (
     <div className='mt-6'>
-      <div className='card w-full bg-base-100 shadow rounded-xl'>
+      <div className='card w-full bg-base-100 shadow'>
         <div className='card-body'>
-          <div className=''>Recent Transactions</div>
+          <div className=''>{title}</div>
           <table className='table table-sm'>
             <thead className=''>
               <tr>
@@ -35,14 +60,18 @@ export const ExpensesAll = () => {
                     </div>
                   </td>
                   <td>
-                    {transaction.date && new Date(transaction.date).toISOString().split('T')[0]}
+                    {transaction.date &&
+                      new Date(transaction.date).toISOString().split('T')[0]}
                   </td>
                   <td>
                     <div className='flex gap-2'>
                       <div className='cursor-pointer'>
                         <EyeIcon />
                       </div>
-                      <div className='text-red-400 cursor-pointer'>
+                      <div
+                        className='text-red-400 cursor-pointer'
+                        onClick={() => prepForDelete(transaction._id)}
+                      >
                         <TrashIcon />
                       </div>
                     </div>

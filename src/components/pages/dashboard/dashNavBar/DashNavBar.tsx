@@ -27,21 +27,37 @@ export const DashNavBar = () => {
     navigate('/login');
     toast.success('Logged out');
   };
+
+  const handleShowModal = () => {
+    document.getElementById('exp_modal').showModal();
+  };
   return (
-    <div className='navbar bg-base-100 px-4 border'>
+    <div className='navbar bg-base-100 px-4'>
       <div className='flex-1'>
-        <div className='flex-none'>
+        <div className='flex-none lg:hidden max-sm:block'>
           <DashDrawer />
         </div>
         <div className='form-control'>
-          <Input type='text' name='search' placeholder='Search' color='' formik={formik} />
+          <Input
+            type='text'
+            name='search'
+            placeholder='Search'
+            color=''
+            formik={formik}
+          />
         </div>
       </div>
+
       <div className='flex-none gap-2'>
+        <div className='btn btn-outline' onClick={handleShowModal}>
+          New Transaction
+        </div>
         <div className='dropdown dropdown-end'>
-          <div tabIndex={0} role='button' className='btn btn-ghost btn-circle avatar'>
-            <div className='w-10 h-10 rounded-full bg-base-300'>
-              <div className='h-10 align-middle flex items-center justify-center'>A</div>
+          <div tabIndex={0} role='button' className='btn btn-circle avatar'>
+            <div className='w-12 h-12 rounded-xl bg-current hover:bg-base-100'>
+              <div className='h-12 align-middle flex items-center justify-center text-white hover:text-current'>
+                A
+              </div>
             </div>
           </div>
           <ul

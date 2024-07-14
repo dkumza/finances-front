@@ -28,7 +28,7 @@ export const Input = ({ color, type, name, placeholder, formik }: InputProps) =>
         type={type}
         name={name}
         placeholder={placeholder}
-        className={`${color} input input-bordered rounded-xl w-full`}
+        className={`${color} input input-bordered w-full`}
         onChange={handleChange}
         onBlur={handleBlur}
         min={0}

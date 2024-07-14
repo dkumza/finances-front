@@ -3,13 +3,14 @@ import { expensesValSchema } from '../auth/validationSchemas';
 import { FormValues, Input } from '../../inputs/Input';
 import { Button } from '../../inputs/Button';
 import { Select } from '../../inputs/Select';
-import { AppDispatch } from '../../../store/store';
-import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
+import { handleExpenses } from '../../../helpers/handleExpenses';
+import { useAppDispatch } from '../../../store/hooks';
 
 export const ExpensesForm = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const expModal = document.getElementById('exp_modal') as HTMLDialogElement;
+  const dispatch = useAppDispatch();
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -20,23 +21,28 @@ export const ExpensesForm = () => {
     },
     validationSchema: expensesValSchema,
     onSubmit: (values) => {
-      console.log('values: ', values);
+      expModal?.close();
       dispatch(createExpense(values)).then((res) => {
         // The createExpense action has been fulfilled
         if (res.type === 'expenses/createExpense/fulfilled') {
-          toast.success('Expense created successfully');
+          toast.success('Transaction added successfully');
           formik.resetForm();
-          return;
+          handleExpenses();
         }
         // The createExpense action has been rejected
-        if (res.type === 'expenses/createExpense/rejected') {
+        if (res.type !== 'expenses/createExpense/fulfilled') {
+          const errorMessage = `Failed to create expense. Type: ${res.type}`;
           toast.error('Failed to create expense');
-          return;
+          throw new Error(errorMessage);
         }
-        console.log('Expenses Error: ', res);
       });
     },
   });
+
+  const handleCancel = () => {
+    expModal.close();
+    formik.resetForm();
+  };
 
   return (
     <div className='container flex items-center justify-center flex-col'>
@@ -64,7 +70,18 @@ export const ExpensesForm = () => {
             placeholder='Amount'
             formik={formik}
           />
-          <Button action={() => {}} text='Submit' color='btn-primary' />
+          <Button
+            action={() => {}}
+            type='submit'
+            text='Submit'
+            color='btn-primary'
+          />
+          <Button
+            action={handleCancel}
+            type='button'
+            text='Cancel'
+            color='btn-base-200'
+          />
         </div>
       </form>
     </div>

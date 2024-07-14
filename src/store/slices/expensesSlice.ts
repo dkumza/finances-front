@@ -11,6 +11,8 @@ export interface Transaction {
 }
 
 export interface Expense {
+  allExpenses: Transaction[];
+  allIncomes: Transaction[];
   balance: number;
   totalExpense: number;
   totalIncome: number;
@@ -27,6 +29,8 @@ export interface ExpenseState {
 export const initialState: ExpenseState = {
   expense: '',
   fetchedExpenses: {
+    allExpenses: [],
+    allIncomes: [],
     balance: 0,
     totalExpense: 0,
     totalIncome: 0,
@@ -48,7 +52,14 @@ export const initialState: ExpenseState = {
 export const expensesSlice = createSlice({
   name: 'expenses',
   initialState,
-  reducers: {},
+  reducers: {
+    setExpenses: (state, action) => {
+      state.fetchedExpenses = action.payload;
+    },
+    setExpenseToDelete: (state, action) => {
+      state.expense = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createExpense.pending, (state) => {
@@ -77,5 +88,7 @@ export const expensesSlice = createSlice({
       });
   },
 });
+
+export const { setExpenses, setExpenseToDelete } = expensesSlice.actions;
 
 export default expensesSlice.reducer;

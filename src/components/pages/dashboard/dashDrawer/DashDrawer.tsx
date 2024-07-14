@@ -1,13 +1,5 @@
-import {
-  BillsIcon,
-  BudgetIcon,
-  DashIcon,
-  ExpensesIcon,
-  HamburgerIcon,
-  IncomeIcon,
-  SavingsIcon,
-} from '../../../../assets/svg/svgIcons';
-import { DashNavItem } from './DashNavItem';
+import { HamburgerIcon } from '../../../../assets/svg/svgIcons';
+import { DashMenu } from './DashMenu';
 
 export const DashDrawer = () => {
   return (
@@ -21,25 +13,7 @@ export const DashDrawer = () => {
       </div>
       <div className='drawer-side drawer-side-no-scroll'>
         <label htmlFor='my-drawer' aria-label='close sidebar' className='drawer-overlay '></label>
-        <ul className='menu  bg-base-200  text-base-content min-h-full w-80 p-4'>
-          <div className='text-center text-2xl font-semibold mb-4'>Menu</div>
-          {/* Sidebar content here */}
-          <li>
-            <DashNavItem icon={<DashIcon />} text='Dashboard' />
-          </li>
-          <li className=''>
-            <a className='font-semibold text-neutral-500 mt-2'>Transactions</a>
-            <DashNavItem icon={<ExpensesIcon />} text='Expenses' />
-            <DashNavItem icon={<IncomeIcon />} text='Income' />
-          </li>
-          <li>
-            <a className='font-semibold text-neutral-500 mt-2'>Financial Control</a>
-
-            <DashNavItem icon={<BudgetIcon />} text='Budgets' />
-            <DashNavItem icon={<BillsIcon />} text='Bills' />
-            <DashNavItem icon={<SavingsIcon />} text='Savings' />
-          </li>
-        </ul>
+        <DashMenu />
       </div>
     </div>
   );

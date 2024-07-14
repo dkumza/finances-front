@@ -14,7 +14,7 @@ export const LoginForm = () => {
 
   const formik = useFormik<FormValues>({
     initialValues: {
-      email: 'darius@email.com',
+      email: 'darius@darius.eu',
       password: '123456',
     },
     validationSchema: loginValSchema,
@@ -52,7 +52,12 @@ export const LoginForm = () => {
             placeholder='Password'
             formik={formik}
           />
-          <Button action={() => {}} text='Log in' color='btn-primary' />
+          <Button
+            type='submit'
+            action={() => {}}
+            text='Log in'
+            color='btn-primary'
+          />
         </div>
       </form>
     </div>

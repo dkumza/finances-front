@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { MyRejectValue, handleAxiosError } from '../../helpers/handleAxiosError';
+import {
+  MyRejectValue,
+  handleAxiosError,
+} from '../../helpers/handleAxiosError';
 import { FormValues } from '../../components/inputs/Input';
 import { Expense } from '../slices/expensesSlice';
 import { RootState } from '../store';
@@ -22,7 +25,8 @@ export const createExpense = createAsyncThunk<
   const token = thunkAPI.getState().login.token;
   const fixData = { ...expensesData };
   // "??" 0 Prevents errors when trying to access property 'amount' on null or undefined
-  if (expensesData.category !== 'Salary') fixData.amount = -Math.abs(expensesData.amount ?? 0);
+  if (expensesData.category !== 'Salary')
+    fixData.amount = -Math.abs(expensesData.amount ?? 0);
   try {
     const response = await axios.post(EXP_URL, fixData, {
       headers: { Authorization: `Bearer ${token}` },
@@ -52,5 +56,23 @@ export const fetchExpenses = createAsyncThunk<
     const axiosError = handleAxiosError(error, thunkAPI) as unknown as FetchExp;
     const { message, status } = axiosError.payload;
     return thunkAPI.rejectWithValue({ message, status });
+  }
+});
+
+export const deleteExpense = createAsyncThunk<
+  Expense,
+  string,
+  { state: RootState; rejectValue: MyRejectValue }
+>('expenses/removeExpense', async (id, thunkAPI) => {
+  const token = thunkAPI.getState().login.token;
+  try {
+    const response = await axios.delete(`${EXP_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const { data } = response;
+    return data;
+  } catch (error) {
+    console.error('error: ', error);
+    return handleAxiosError(error, thunkAPI);
   }
 });

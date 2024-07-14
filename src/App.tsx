@@ -19,7 +19,6 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       dispatch(tokenStatus(token)).then((res) => {
-        console.log('tokenStatus res: ', res);
         if (res.type === 'auth/tokenStatus/rejected') {
           dispatch(logout());
         }

@@ -7,9 +7,10 @@ import { AppDispatch } from '../../../store/store';
 import { useDispatch } from 'react-redux';
 import { createExpense } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
+import { handleExpenses } from '../../../helpers/handleExpenses';
 
 export const ExpensesForm = () => {
-  const modal = document.getElementById('exp_modal');
+  const modal = document.getElementById('exp_modal') as HTMLDialogElement;
   const dispatch: AppDispatch = useDispatch();
 
   const formik = useFormik<FormValues>({
@@ -26,16 +27,16 @@ export const ExpensesForm = () => {
       dispatch(createExpense(values)).then((res) => {
         // The createExpense action has been fulfilled
         if (res.type === 'expenses/createExpense/fulfilled') {
-          toast.success('Expense created successfully');
+          toast.success('Transaction added successfully');
           formik.resetForm();
-          return;
+          handleExpenses();
         }
         // The createExpense action has been rejected
-        if (res.type === 'expenses/createExpense/rejected') {
+        if (res.type !== 'expenses/createExpense/fulfilled') {
+          const errorMessage = `Failed to create expense. Type: ${res.type}`;
           toast.error('Failed to create expense');
-          return;
+          throw new Error(errorMessage);
         }
-        console.log('Expenses Error: ', res);
       });
     },
   });

@@ -1,9 +1,5 @@
 import { DashNavBar } from './dashNavBar/DashNavBar';
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../../store/hooks';
-import { fetchExpenses } from '../../../store/actions/expensesActions';
-import { toast } from 'react-toastify';
-import { logout } from '../../../store/slices/authSlice';
 import { DashSideNav } from './dashDrawer/DashSideNav';
 import { DashPage } from './DashPage';
 import { Route, Routes } from 'react-router-dom';
@@ -14,40 +10,13 @@ import { TTransactionsPage } from './transactionsPages/TTransactionsPage';
 import { BudgetsPAge } from './financialControlPages/BudgetsPage';
 import { BillsPage } from './financialControlPages/BillsPage';
 import { SavingsPage } from './financialControlPages/SavingsPage';
-import { setExpenses } from '../../../store/slices/expensesSlice';
 import { ExpensesFormModal } from '../expenses/ExpensesFormModal';
+import { handleExpenses } from '../../../helpers/handleExpenses';
 
 export const DashContainer = () => {
-  const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchExpenses()).then((res) => {
-      console.log('fetchExpenses res: ', res.payload);
-      if (res.type === 'expenses/fetchExpenses/fulfilled') {
-        dispatch(setExpenses(res.payload));
-        return;
-      }
-      if (res.type === 'expenses/fetchExpenses/rejected') {
-        console.error('fetchExpenses rejected');
-        const errorInfo = res.payload as { message: string; status: number };
-
-        console.error('fetchExpenses Error: ', errorInfo);
-        if (errorInfo && errorInfo.status === 401) {
-          console.error('Unauthorized');
-          dispatch(logout());
-          toast.error('Session expired');
-          return;
-        }
-
-        if (errorInfo && errorInfo.status === undefined) {
-          dispatch(logout());
-          toast.error('Something went wrong');
-          return;
-        }
-        return;
-      }
-      console.log('fetchExpenses Error: ', res);
-    });
-  }, [dispatch]);
+    handleExpenses();
+  }, []);
 
   return (
     <div className='w-full flex border min-h-screen'>

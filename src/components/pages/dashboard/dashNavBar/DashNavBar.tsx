@@ -5,7 +5,6 @@ import { useAppDispatch } from '../../../../store/hooks';
 import { logout } from '../../../../store/slices/authSlice';
 import { toast } from 'react-toastify';
 import { DashDrawer } from '../dashDrawer/DashDrawer';
-import { closeModal, openModal } from '../../../../store/slices/modalSlice';
 // import { searchValSchema } from '../../auth/validationSchemas';
 
 export const DashNavBar = () => {
@@ -30,7 +29,7 @@ export const DashNavBar = () => {
   };
 
   const handleShowModal = () => {
-    const modal = document.getElementById('exp_modal');
+    const modal = document.getElementById('exp_modal') as HTMLDialogElement;
     modal && modal.showModal();
   };
   return (

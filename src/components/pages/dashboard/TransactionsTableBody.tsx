@@ -3,7 +3,19 @@ import { TrashIcon } from '../../../assets/svg/svgIcons';
 import { useAppDispatch } from '../../../store/hooks';
 import { setExpenseToDelete } from '../../../store/slices/expensesSlice';
 
-export const TransactionsTableBody: FC<any> = ({ transaction }) => {
+interface ITransactionsTableBody {
+  transaction: {
+    _id: string;
+    category: string;
+    description: string;
+    amount: number;
+    date: string;
+  };
+}
+
+export const TransactionsTableBody: FC<ITransactionsTableBody> = ({
+  transaction,
+}) => {
   const dispatch = useAppDispatch();
 
   const confModal = document.getElementById(

@@ -9,6 +9,7 @@ export const TTransactionsPage = () => {
     <>
       {transactions && (
         <TransactionsTable
+          length={transactions.length}
           title='All Transactions'
           transactions={transactions}
         />

@@ -8,7 +8,11 @@ export const TExpensesPage = () => {
   return (
     <>
       {allExpenses && (
-        <TransactionsTable title='All Expenses' transactions={allExpenses} />
+        <TransactionsTable
+          length={allExpenses.length}
+          title='All Expenses'
+          transactions={allExpenses}
+        />
       )}
     </>
   );

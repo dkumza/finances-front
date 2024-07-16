@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { FormValues, Input } from '../../../inputs/Input';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { logout } from '../../../../store/slices/authSlice';
 import { toast } from 'react-toastify';
 import { DashDrawer } from '../dashDrawer/DashDrawer';
@@ -10,6 +10,7 @@ import { DashDrawer } from '../dashDrawer/DashDrawer';
 export const DashNavBar = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { email } = useAppSelector((state) => state.login);
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -56,7 +57,7 @@ export const DashNavBar = () => {
           <div tabIndex={0} role='button' className='btn btn-circle avatar'>
             <div className='w-12 h-12 rounded-xl bg-current hover:bg-base-100'>
               <div className='h-12 align-middle flex items-center justify-center text-white hover:text-current'>
-                A
+                {email[0].toUpperCase()}
               </div>
             </div>
           </div>

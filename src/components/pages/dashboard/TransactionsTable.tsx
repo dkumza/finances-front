@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { EyeIcon, TrashIcon } from '../../../assets/svg/svgIcons';
+import { TrashIcon } from '../../../assets/svg/svgIcons';
 import { useAppDispatch } from '../../../store/hooks';
 import { setExpenseToDelete } from '../../../store/slices/expensesSlice';
 

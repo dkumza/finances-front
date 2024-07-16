@@ -15,7 +15,12 @@ export const DashOverview = () => {
     <div className=''>
       <div className='text-lg'>Overview</div>
       <div className='flex gap-6 flex-col lg:flex-row'>
-        <BudgetOverview color='bg-accent' title='Balance' amount={balance} icon={<BalanceIcon />} />
+        <BudgetOverview
+          color='bg-accent'
+          title='Balance'
+          amount={balance}
+          icon={<BalanceIcon />}
+        />
         <BudgetOverview
           color='bg-secondary'
           title='Expenses'
@@ -28,7 +33,7 @@ export const DashOverview = () => {
           amount={totalIncome}
           icon={<IncomeIcon />}
         />
-        <BudgetOverview color='bg-info' title='Savings' amount={0} icon={<SavingsIcon />} />
+        {/* <BudgetOverview color='bg-info' title='Savings' amount={0} icon={<SavingsIcon />} /> */}
       </div>
     </div>
   );

@@ -65,9 +65,10 @@ export const TransactionsTable: FC<ITransactionProps> = ({
                   </td>
                   <td>
                     <div className='flex gap-2'>
-                      <div className='cursor-pointer'>
+                      {/* TODO add edit functionality */}
+                      {/* <div className='cursor-pointer'>
                         <EyeIcon />
-                      </div>
+                      </div> */}
                       <div
                         className='text-red-400 cursor-pointer'
                         onClick={() => prepForDelete(transaction._id)}

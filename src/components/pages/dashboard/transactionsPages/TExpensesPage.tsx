@@ -7,7 +7,6 @@ export const TExpensesPage = () => {
   );
   return (
     <>
-      <div>ExpensesPage</div>
       {allExpenses && (
         <TransactionsTable title='All Expenses' transactions={allExpenses} />
       )}

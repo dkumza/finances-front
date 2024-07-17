@@ -8,7 +8,7 @@ import { useAppSelector } from '../../../../store/hooks';
 import { BudgetOverview } from './BudgetOverview';
 
 export const DashOverview = () => {
-  const { balance, totalExpense, totalIncome } = useAppSelector(
+  const { balance, totalExpense, totalIncome, savings } = useAppSelector(
     (state) => state.expenses.fetchedExpenses
   );
   return (
@@ -33,7 +33,12 @@ export const DashOverview = () => {
           amount={totalIncome}
           icon={<IncomeIcon />}
         />
-        {/* <BudgetOverview color='bg-info' title='Savings' amount={0} icon={<SavingsIcon />} /> */}
+        <BudgetOverview
+          color='bg-info'
+          title='Savings'
+          amount={-savings}
+          icon={<SavingsIcon />}
+        />
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ export const TransactionsTableBody: FC<ITransactionsTableBody> = ({
     dispatch(setExpenseToDelete(id));
   };
   return (
-    <tr>
+    <tr className='hover:bg-base-200'>
       <td className=''>{transaction.category}</td>
       <td>{transaction.description}</td>
       <td className=''>

@@ -25,7 +25,10 @@ export const SignUpForm = () => {
           toast.success('Account created successfully');
         })
         .catch((rejectedValueOrSerializedError) => {
-          console.error('Error while signing up: ', rejectedValueOrSerializedError);
+          console.error(
+            'Error while signing up: ',
+            rejectedValueOrSerializedError
+          );
           toast.error('Error creating account');
         });
     },
@@ -49,9 +52,16 @@ export const SignUpForm = () => {
             placeholder='Password'
             formik={formik}
           />
-          <Button action={() => {}} text='Sign Up' color='btn-accent' />
+          <Button
+            action={() => {}}
+            type='submit'
+            text='Sign Up'
+            color='btn-accent'
+          />
         </div>
-        <p className='text-xs text-right py-2'>* By registering, I confirm that I accept...</p>
+        <p className='text-xs text-right py-2'>
+          * By registering, I confirm that I accept...
+        </p>
       </form>
     </div>
   );

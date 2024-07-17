@@ -38,11 +38,7 @@ export const TransactionsTable: FC<ITransactionProps> = ({
                 transactions
                   .slice(0, length)
                   .map((item) => (
-                    <TransactionsTableBody
-                      key={item._id}
-                      className='hover:bg-base-200'
-                      transaction={item}
-                    />
+                    <TransactionsTableBody key={item._id} transaction={item} />
                   ))}
             </tbody>
           </table>

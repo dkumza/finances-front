@@ -17,6 +17,7 @@ export interface Expense {
   totalExpense: number;
   totalIncome: number;
   transactions: Transaction[];
+  savings: number;
 }
 
 export interface ExpenseState {
@@ -44,6 +45,7 @@ export const initialState: ExpenseState = {
         createdAt: '',
       },
     ],
+    savings: 0,
   },
   expensesStatus: 'idle',
   error: undefined,

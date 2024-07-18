@@ -1,27 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createExpense, fetchExpenses } from '../actions/expensesActions';
+import {
+  createExpense,
+  fetchExpenses,
+  fetchUserExpenses,
+} from '../actions/expensesActions';
 
 export interface Transaction {
   _id: string;
   category: string;
   description: string;
   date: string;
-  amount: number;
+  amount: null;
   createdAt: string;
 }
 
 export interface Expense {
   allExpenses: Transaction[];
   allIncomes: Transaction[];
-  balance: number;
-  totalExpense: number;
-  totalIncome: number;
+  balance: null;
+  totalExpense: null;
+  totalIncome: null;
   transactions: Transaction[];
-  savings: number;
+  savings: null;
 }
 
 export interface ExpenseState {
   expense: string;
+  fetchUserExpenses: Expense;
   fetchedExpenses: Expense;
   expensesStatus: 'idle' | 'loading' | 'success' | 'failed';
   error: string | undefined;
@@ -29,23 +34,42 @@ export interface ExpenseState {
 
 export const initialState: ExpenseState = {
   expense: '',
-  fetchedExpenses: {
+  fetchUserExpenses: {
     allExpenses: [],
     allIncomes: [],
-    balance: 0,
-    totalExpense: 0,
-    totalIncome: 0,
+    balance: null,
+    totalExpense: null,
+    totalIncome: null,
     transactions: [
       {
         _id: '',
         category: '',
         description: '',
         date: '',
-        amount: 0,
+        amount: null,
         createdAt: '',
       },
     ],
-    savings: 0,
+    savings: null,
+  },
+
+  fetchedExpenses: {
+    allExpenses: [],
+    allIncomes: [],
+    balance: null,
+    totalExpense: null,
+    totalIncome: null,
+    transactions: [
+      {
+        _id: '',
+        category: '',
+        description: '',
+        date: '',
+        amount: null,
+        createdAt: '',
+      },
+    ],
+    savings: null,
   },
   expensesStatus: 'idle',
   error: undefined,
@@ -55,6 +79,9 @@ export const expensesSlice = createSlice({
   name: 'expenses',
   initialState,
   reducers: {
+    setUserExpenses: (state, action) => {
+      state.fetchUserExpenses = action.payload;
+    },
     setExpenses: (state, action) => {
       state.fetchedExpenses = action.payload;
     },
@@ -76,6 +103,18 @@ export const expensesSlice = createSlice({
         state.expensesStatus = 'failed';
         state.error = action.error.message;
       })
+      .addCase(fetchUserExpenses.pending, (state) => {
+        state.expensesStatus = 'loading';
+      })
+      .addCase(fetchUserExpenses.fulfilled, (state, { payload }) => {
+        state.expensesStatus = 'success';
+        state.fetchUserExpenses = payload;
+        state.error = undefined;
+      })
+      .addCase(fetchUserExpenses.rejected, (state, action) => {
+        state.expensesStatus = 'failed';
+        state.error = action.error.message;
+      })
       .addCase(fetchExpenses.pending, (state) => {
         state.expensesStatus = 'loading';
       })
@@ -91,6 +130,7 @@ export const expensesSlice = createSlice({
   },
 });
 
-export const { setExpenses, setExpenseToDelete } = expensesSlice.actions;
+export const { setUserExpenses, setExpenses, setExpenseToDelete } =
+  expensesSlice.actions;
 
 export default expensesSlice.reducer;

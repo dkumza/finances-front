@@ -8,7 +8,7 @@ interface ITransactionsTableBody {
     _id: string;
     category: string;
     description: string;
-    amount: number;
+    amount: number | null;
     date: string;
   };
 }
@@ -17,6 +17,7 @@ export const TransactionsTableBody: FC<ITransactionsTableBody> = ({
   transaction,
 }) => {
   const dispatch = useAppDispatch();
+  if (transaction.amount !== 0) return null;
 
   const confModal = document.getElementById(
     'confirm_modal'
@@ -33,7 +34,7 @@ export const TransactionsTableBody: FC<ITransactionsTableBody> = ({
       <td className=''>
         <div
           className={`${
-            transaction.amount > 0
+            transaction.amount && transaction.amount > 0
               ? 'bg-green-100 border border-primary text-green-700'
               : 'bg-rose-100 border border-secondary text-rose-700'
           }  py-0.5 text-center rounded-xl w-24`}

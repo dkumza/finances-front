@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { TransactionsTableBody } from './TransactionsTableBody';
 
-interface ITransactionProps {
-  length: number;
+export interface ITransactionProps {
+  length?: number;
   transactions: {
     _id: string;
     category: string;
     description: string;
-    amount: number;
+    amount: number | null;
     date: string;
   }[];
-  title: string;
+  title?: string;
 }
 
 export const TransactionsTable: FC<ITransactionProps> = ({

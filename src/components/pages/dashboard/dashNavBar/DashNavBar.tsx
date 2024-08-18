@@ -12,6 +12,8 @@ export const DashNavBar = () => {
   const dispatch = useAppDispatch();
   const { email } = useAppSelector((state) => state.login);
 
+  const userEmail = localStorage.getItem('email');
+
   const formik = useFormik<FormValues>({
     initialValues: {
       search: '',
@@ -32,6 +34,7 @@ export const DashNavBar = () => {
   const handleShowModal = () => {
     document.getElementById('exp_modal').showModal();
   };
+
   return (
     <div className='navbar bg-base-100 px-4'>
       <div className='flex-1'>
@@ -56,11 +59,13 @@ export const DashNavBar = () => {
         <div className='btn btn-primary w-36'>Personal</div>
         <div className='dropdown dropdown-end'>
           <div tabIndex={0} role='button' className='btn btn-circle avatar'>
-            <div className='w-12 h-12 rounded-xl bg-current hover:bg-base-100'>
-              <div className='h-12 align-middle flex items-center justify-center text-white hover:text-current'>
-                {email && email[0].toUpperCase()}
+            {userEmail && (
+              <div className='w-12 h-12 rounded-xl bg-current hover:bg-base-100'>
+                <div className='h-12 align-middle flex items-center justify-center text-white hover:text-current'>
+                  {userEmail[0].toUpperCase()}
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <ul
             tabIndex={0}

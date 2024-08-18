@@ -36,7 +36,7 @@ export const DashOverview = () => {
         <BudgetOverview
           color='bg-info'
           title='Savings'
-          amount={-savings}
+          amount={-savings!}
           icon={<SavingsIcon />}
         />
       </div>

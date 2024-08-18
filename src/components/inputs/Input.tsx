@@ -20,12 +20,19 @@ interface InputProps {
   formik: FormikProps<FormValues>;
 }
 
-export const Input = ({ color, type, name, placeholder, formik }: InputProps) => {
+export const Input = ({
+  color,
+  type,
+  name,
+  placeholder,
+  formik,
+}: InputProps) => {
   const { handleChange, handleBlur, values } = formik;
   return (
     <div>
       <input
         type={type}
+        step={0.01}
         name={name}
         placeholder={placeholder}
         className={`${color} input input-bordered w-full`}
@@ -35,8 +42,11 @@ export const Input = ({ color, type, name, placeholder, formik }: InputProps) =>
         // prefix='$'
         value={values[name as keyof FormValues] || ''}
       />
-      {formik.touched[name as keyof FormValues] && formik.errors[name as keyof FormValues] ? (
-        <p className='text-xs text-red-500'>{formik.errors[name as keyof FormValues]}</p>
+      {formik.touched[name as keyof FormValues] &&
+      formik.errors[name as keyof FormValues] ? (
+        <p className='text-xs text-red-500'>
+          {formik.errors[name as keyof FormValues]}
+        </p>
       ) : null}
     </div>
   );

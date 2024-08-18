@@ -11,11 +11,15 @@ import { BudgetsPAge } from './financialControlPages/BudgetsPage';
 import { BillsPage } from './financialControlPages/BillsPage';
 import { SavingsPage } from './financialControlPages/SavingsPage';
 import { ExpensesFormModal } from '../expenses/ExpensesFormModal';
-import { handleExpenses } from '../../../helpers/handleExpenses';
+import {
+  handleExpenses,
+  handleUserExpenses,
+} from '../../../helpers/handleExpenses';
 import { ExpensesDeleteModal } from '../expenses/ExpensesDeleteModal';
 
 export const DashContainer = () => {
   useEffect(() => {
+    handleUserExpenses();
     handleExpenses();
   }, []);
 

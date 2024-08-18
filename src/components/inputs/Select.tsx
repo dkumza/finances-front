@@ -32,7 +32,7 @@ export const Select = ({ color, name, formik }: SelectProps) => {
 
   return (
     <select
-      className={`${color} select w-full rounded-2xl`}
+      className={`${color} select w-full rounded-lg`}
       name={name}
       value={formik.values[name]}
       onChange={formik.handleChange}

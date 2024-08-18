@@ -5,7 +5,7 @@ import { login, signUp, tokenStatus } from '../actions/authActions';
 export interface AuthState {
   token: string;
   tokenStatus: string;
-  email: string;
+  email: string | null;
   loading: boolean;
   error: string | null;
 }
@@ -16,7 +16,7 @@ const localStorageEmail = localStorage.getItem('email');
 export const initialState: AuthState = {
   token: localStorageToken || '',
   tokenStatus: '',
-  email: localStorageEmail || '',
+  email: localStorageEmail || null,
   loading: false,
   error: null,
 };
@@ -28,7 +28,7 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.token = '';
       state.tokenStatus = '';
-      state.email = '';
+      state.email = null;
       state.error = null;
     },
   },
@@ -56,14 +56,20 @@ export const authSlice = createSlice({
         state.loading = false;
       })
       // Token status
-      .addCase(tokenStatus.fulfilled, (state, action: PayloadAction<string>) => {
-        state.tokenStatus = action.payload;
-        state.error = null;
-      })
-      .addCase(tokenStatus.rejected, (state, action: PayloadAction<unknown>) => {
-        state.tokenStatus = '';
-        state.error = (action.payload as { message: string }).message;
-      });
+      .addCase(
+        tokenStatus.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          state.tokenStatus = action.payload;
+          state.error = null;
+        }
+      )
+      .addCase(
+        tokenStatus.rejected,
+        (state, action: PayloadAction<unknown>) => {
+          state.tokenStatus = '';
+          state.error = (action.payload as { message: string }).message;
+        }
+      );
   },
 });
 

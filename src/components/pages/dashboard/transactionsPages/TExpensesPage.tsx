@@ -7,9 +7,12 @@ export const TExpensesPage = () => {
   );
   return (
     <>
-      <div>ExpensesPage</div>
       {allExpenses && (
-        <TransactionsTable title='All Expenses' transactions={allExpenses} />
+        <TransactionsTable
+          length={allExpenses.length}
+          title='All Expenses'
+          transactions={allExpenses}
+        />
       )}
     </>
   );

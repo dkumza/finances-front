@@ -7,6 +7,8 @@ import {
 import { FormValues } from '../../components/inputs/Input';
 import { Expense } from '../slices/expensesSlice';
 import { RootState } from '../store';
+import { jwtDecode } from 'jwt-decode';
+import { DecodedToken } from '../../middlewares/loginMW';
 
 export interface FetchExp {
   payload: {
@@ -39,6 +41,27 @@ export const createExpense = createAsyncThunk<
   }
 });
 
+export const fetchUserExpenses = createAsyncThunk<
+  Expense,
+  void,
+  { state: RootState; rejectValue: MyRejectValue }
+>('expenses/fetchUserExpenses', async (_, thunkAPI) => {
+  const token = thunkAPI.getState().login.token;
+  const decodedToken: DecodedToken = jwtDecode(token);
+  const id = decodedToken.id;
+  try {
+    const response = await axios.get(`${EXP_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const { data } = response;
+    console.log('data: ', data);
+    return data;
+  } catch (error) {
+    console.error('error: ', error);
+    return handleAxiosError(error, thunkAPI);
+  }
+});
+
 export const fetchExpenses = createAsyncThunk<
   Expense,
   void,
@@ -52,7 +75,7 @@ export const fetchExpenses = createAsyncThunk<
     const { data } = response;
     return data;
   } catch (error) {
-    console.error('error: ', error);
+    // console.error('error: ', error);
     const axiosError = handleAxiosError(error, thunkAPI) as unknown as FetchExp;
     const { message, status } = axiosError.payload;
     return thunkAPI.rejectWithValue({ message, status });

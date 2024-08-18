@@ -1,8 +1,9 @@
 import { Middleware } from '@reduxjs/toolkit';
 import { jwtDecode } from 'jwt-decode';
 
-interface DecodedToken {
-  email: string;
+export interface DecodedToken {
+  email?: string;
+  id?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -17,7 +18,7 @@ export const loginMW: Middleware = (storeApi) => (next) => (action) => {
   if (tokenState) {
     const decodedToken: DecodedToken = jwtDecode(tokenState);
     const email = decodedToken.email;
-    localStorage.setItem('email', email);
+    email && localStorage.setItem('email', email);
   }
   return result;
 };

@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { FormValues, Input } from '../../../inputs/Input';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { logout } from '../../../../store/slices/authSlice';
 import { toast } from 'react-toastify';
 import { DashDrawer } from '../dashDrawer/DashDrawer';
@@ -10,6 +10,9 @@ import { DashDrawer } from '../dashDrawer/DashDrawer';
 export const DashNavBar = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { email } = useAppSelector((state) => state.login);
+
+  const userEmail = localStorage.getItem('email');
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -31,6 +34,7 @@ export const DashNavBar = () => {
   const handleShowModal = () => {
     document.getElementById('exp_modal').showModal();
   };
+
   return (
     <div className='navbar bg-base-100 px-4'>
       <div className='flex-1'>
@@ -49,30 +53,24 @@ export const DashNavBar = () => {
       </div>
 
       <div className='flex-none gap-2'>
-        <div className='btn btn-outline' onClick={handleShowModal}>
+        <div className='btn btn-neutral w-36'>Personal</div>
+        <div className='btn btn-outline w-36' onClick={handleShowModal}>
           New Transaction
         </div>
         <div className='dropdown dropdown-end'>
-          <div tabIndex={0} role='button' className='btn btn-circle avatar'>
-            <div className='w-12 h-12 rounded-xl bg-current hover:bg-base-100'>
-              <div className='h-12 align-middle flex items-center justify-center text-white hover:text-current'>
-                A
+          <div tabIndex={0} role='button' className='avatar'>
+            {userEmail && (
+              <div className='w-12 h-12 rounded-lg btn btn-primary'>
+                <div className='h-12 align-middle flex items-center justify-center  text-white'>
+                  {userEmail[0].toUpperCase()}
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <ul
             tabIndex={0}
             className='mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52'
           >
-            <li>
-              <a className='justify-between'>
-                Profile
-                <span className='badge'>New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
             <li>
               <a onClick={handleLogout}>Logout</a>
             </li>

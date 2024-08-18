@@ -15,6 +15,7 @@ export const DashOverview = () => {
     <div className=''>
       <div className='text-lg'>Overview</div>
       <div className='flex gap-6 flex-col lg:flex-row'>
+        {/* TODO - add possibility to add balance on balance click (in modal, etc?)*/}
         <BudgetOverview
           color='bg-accent'
           title='Balance'

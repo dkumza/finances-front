@@ -14,7 +14,7 @@ export const BudgetOverview: FC<BudgetOverviewProps> = ({
   icon,
 }) => {
   return (
-    <div className='card w-full bg-base-100 shadow rounded-xl mt-6'>
+    <div className='card w-full bg-base-100 shadow rounded-xl mt-6 '>
       <div className='card-body'>
         <div className='flex justify-between'>
           <p>{title}</p>

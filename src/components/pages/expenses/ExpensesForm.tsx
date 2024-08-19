@@ -5,7 +5,10 @@ import { Button } from '../../inputs/Button';
 import { Select } from '../../inputs/Select';
 import { createExpense } from '../../../store/actions/expensesActions';
 import { toast } from 'react-toastify';
-import { handleExpenses } from '../../../helpers/handleExpenses';
+import {
+  handleExpenses,
+  handleUserExpenses,
+} from '../../../helpers/handleExpenses';
 import { useAppDispatch } from '../../../store/hooks';
 
 export const ExpensesForm = () => {
@@ -27,6 +30,7 @@ export const ExpensesForm = () => {
         if (res.type === 'expenses/createExpense/fulfilled') {
           toast.success('Transaction added successfully');
           formik.resetForm();
+          handleUserExpenses();
           handleExpenses();
         }
         // The createExpense action has been rejected

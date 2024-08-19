@@ -17,7 +17,8 @@ export const TransactionsTableBody: FC<ITransactionsTableBody> = ({
   transaction,
 }) => {
   const dispatch = useAppDispatch();
-  if (transaction.amount !== 0) return null;
+
+  if (transaction.amount === 0) return null;
 
   const confModal = document.getElementById(
     'confirm_modal'
@@ -27,6 +28,7 @@ export const TransactionsTableBody: FC<ITransactionsTableBody> = ({
     confModal?.showModal();
     dispatch(setExpenseToDelete(id));
   };
+
   return (
     <tr className='hover:bg-base-200'>
       <td className=''>{transaction.category}</td>

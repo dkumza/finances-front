@@ -54,14 +54,14 @@ export const DashNavBar = () => {
 
       <div className='flex-none gap-2'>
         <div className='btn btn-neutral w-36'>Personal</div>
-        <div className='btn btn-outline w-36' onClick={handleShowModal}>
+        <div className='btn  btn-primary w-36' onClick={handleShowModal}>
           New Transaction
         </div>
         <div className='dropdown dropdown-end'>
           <div tabIndex={0} role='button' className='avatar'>
             {userEmail && (
               <div className='w-12 h-12 rounded-lg btn btn-primary'>
-                <div className='h-12 align-middle flex items-center justify-center  text-white'>
+                <div className='h-12 align-middle flex items-center justify-center  '>
                   {userEmail[0].toUpperCase()}
                 </div>
               </div>

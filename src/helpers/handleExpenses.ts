@@ -10,7 +10,7 @@ import store from '../store/store';
 
 export const handleUserExpenses = () => {
   store.dispatch(fetchUserExpenses()).then((res) => {
-    console.log('fetchUserExpenses res: ', res.payload);
+    console.log('single fetchUserExpenses res: ', res.payload);
     if (res.type === 'expenses/fetchUserExpenses/fulfilled') {
       store.dispatch(setExpenses(res.payload));
       return;
@@ -37,7 +37,7 @@ export const handleUserExpenses = () => {
 
 export const handleExpenses = () => {
   store.dispatch(fetchExpenses()).then((res) => {
-    console.log('fetchExpenses res: ', res.payload);
+    console.log('all fetchExpenses res: ', res.payload);
     if (res.type === 'expenses/fetchExpenses/fulfilled') {
       store.dispatch(setExpenses(res.payload));
       return;
@@ -58,7 +58,7 @@ export const handleExpenses = () => {
       }
       return;
     }
-    console.log('fetchExpenses Error: ', res);
+    console.log('All fetchExpenses Error: ', res);
   });
 };
 

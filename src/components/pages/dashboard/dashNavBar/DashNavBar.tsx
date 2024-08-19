@@ -61,7 +61,7 @@ export const DashNavBar = () => {
           <div tabIndex={0} role='button' className='avatar'>
             {userEmail && (
               <div className='w-12 h-12 rounded-lg btn btn-primary'>
-                <div className='h-12 align-middle flex items-center justify-center  text-white'>
+                <div className='h-12 align-middle flex items-center justify-center  '>
                   {userEmail[0].toUpperCase()}
                 </div>
               </div>

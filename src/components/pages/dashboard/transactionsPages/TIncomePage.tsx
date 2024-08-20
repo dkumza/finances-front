@@ -3,7 +3,7 @@ import { TransactionsTable } from '../TransactionsTable';
 
 export const TIncomePage = () => {
   const { allIncomes } = useAppSelector(
-    (state) => state.expenses.fetchedExpenses
+    (state) => state.expenses.fetchUserExpenses
   );
   return (
     <>

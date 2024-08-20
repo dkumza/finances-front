@@ -18,7 +18,8 @@ export const TransactionsTableBody: FC<ITransactionsTableBody> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  if (transaction.amount === 0) return null;
+  if (!transaction.amount) return null;
+  console.log('transaction: ', transaction);
 
   const confModal = document.getElementById(
     'confirm_modal'

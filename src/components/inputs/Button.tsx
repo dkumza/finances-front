@@ -1,8 +1,8 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler } from "react";
 
 interface ButtonProps {
   action: MouseEventHandler<HTMLButtonElement>;
-  type?: 'submit' | 'button' | 'reset';
+  type?: "submit" | "button" | "reset";
   text: string;
   color: string;
 }

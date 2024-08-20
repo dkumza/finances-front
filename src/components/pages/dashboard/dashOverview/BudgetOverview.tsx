@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-interface BudgetOverviewProps {
+export interface BudgetOverviewProps {
   color: string;
   title: string;
   amount: number | null;
@@ -20,7 +20,7 @@ export const BudgetOverview: FC<BudgetOverviewProps> = ({
           <p>{title}</p>
           <div className={`${color} text-white p-1.5 rounded-lg`}>{icon}</div>
         </div>
-        <h2 className='text-4xl'>{amount}</h2>
+        <h2 className='text-4xl'>{amount ? amount : 0}</h2>
       </div>
     </div>
   );

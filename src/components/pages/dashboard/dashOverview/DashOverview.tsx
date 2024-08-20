@@ -5,6 +5,7 @@ import {
   SavingsIcon,
 } from '../../../../assets/svg/svgIcons';
 import { useAppSelector } from '../../../../store/hooks';
+import { BalanceSavingsOverview } from './BalanceSavingsOverview';
 import { BudgetOverview } from './BudgetOverview';
 
 export const DashOverview = () => {
@@ -16,6 +17,7 @@ export const DashOverview = () => {
       <div className='text-lg'>Overview</div>
       <div className='flex gap-6 flex-col lg:flex-row'>
         {/* TODO - add possibility to add balance on balance click (in modal, etc?)*/}
+
         <BudgetOverview
           color='bg-accent'
           title='Balance'
@@ -34,10 +36,11 @@ export const DashOverview = () => {
           amount={totalIncome}
           icon={<IncomeIcon />}
         />
-        <BudgetOverview
+
+        <BalanceSavingsOverview
           color='bg-info'
           title='Savings'
-          amount={-savings!}
+          amount={savings}
           icon={<SavingsIcon />}
         />
       </div>

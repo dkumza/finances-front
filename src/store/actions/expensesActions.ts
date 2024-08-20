@@ -27,7 +27,7 @@ export const createExpense = createAsyncThunk<
   const token = thunkAPI.getState().login.token;
   const fixData = { ...expensesData };
   // "??" 0 Prevents errors when trying to access property 'amount' on null or undefined
-  if (expensesData.category !== 'Salary')
+  if (expensesData.category !== 'Salary' && expensesData.category !== 'Savings')
     fixData.amount = -Math.abs(expensesData.amount ?? 0);
   try {
     const response = await axios.post(EXP_URL, fixData, {

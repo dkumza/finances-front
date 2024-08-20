@@ -18,6 +18,7 @@ export const TransactionsTable: FC<ITransactionProps> = ({
   title,
   transactions,
 }) => {
+  console.log('transactions: ', transactions);
   return (
     <div className='mt-6'>
       <div className='card w-full bg-base-100 shadow'>
